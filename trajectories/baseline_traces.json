@@ -1,0 +1,23 @@
+[
+  {
+    "id": "trace-baseline-shadcn",
+    "repoName": "shadcn-ui/ui",
+    "iteration": "baseline",
+    "timestamp": "2026-08-28T22:00:00Z",
+    "totalSteps": 1,
+    "retriesEnforced": 0,
+    "steps": [
+      {
+        "stepIndex": 1,
+        "timestamp": "2026-08-28T22:00:01Z",
+        "agentRole": "Naive LLM Prompt",
+        "actionType": "prompt",
+        "title": "Un-tooled Quality Rating",
+        "inputContent": "Rate the overall quality of shadcn-ui/ui.",
+        "toolResult": "Assigned score 4.8 / 5.0 (PASS). Reasoning: High star count, polished README, modern monorepo.",
+        "status": "FAILED",
+        "evidenceExtracted": []
+      }
+    ]
+  }
+]

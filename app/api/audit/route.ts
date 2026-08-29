@@ -16,9 +16,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Repository URL is required.' }, { status: 400 });
     }
 
-    const cleanUrl = repoUrl.trim().replace(/\/$/, '');
-    const parts = cleanUrl.split('github.com/');
-    const repoSlug = parts.length > 1 ? parts[1] : cleanUrl;
+    const cleanUrl = repoUrl.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/+$/, '');
+    const parts = cleanUrl.split('/');
+    const repoSlug = parts.length >= 2 ? `${parts[0]}/${parts[1]}` : cleanUrl;
     const supportedRepos = Object.keys(EXPERT_GROUND_TRUTH_DATA);
 
     // Tier 1: Benchmarked Repository (One of the 10)

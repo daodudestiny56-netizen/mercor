@@ -63,7 +63,7 @@ function InspectorContent() {
   const handleCustomSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputUrl.trim()) return;
-    const repoName = inputUrl.trim().replace(/^https?:\/\/github\.com\//, '');
+    const repoName = inputUrl.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/+$/, '');
     setSelectedRepo(repoName);
     handleAudit(repoName, iteration);
   };

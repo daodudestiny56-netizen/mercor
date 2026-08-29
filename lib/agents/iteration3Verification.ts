@@ -8,18 +8,15 @@ export async function runIteration3Agent(repoName: string): Promise<AuditReport 
   const startTime = Date.now();
   const groundTruth = EXPERT_GROUND_TRUTH_DATA[repoName];
 
-  if (!groundTruth) {
-    return null;
-  }
-
   // Obtain candidate evaluation from Iteration 2 Tool Agent
   let candidateReport = await runIteration2Agent(repoName);
   if (!candidateReport) {
+    if (!groundTruth) return null;
     candidateReport = groundTruth;
   }
 
   // Verification Auditor Pass
-  let verifiedDimensions: DimensionEvaluation[] = candidateReport.dimensions.map(dim => {
+  let verifiedDimensions: DimensionEvaluation[] = (candidateReport.dimensions || []).map(dim => {
     validateDimensionEvidence(dim);
     return {
       ...dim,
@@ -70,5 +67,6 @@ Return complete verified JSON output.`;
     totalCheckableEvidence: citationCount,
     executionTimeMs: Date.now() - startTime + 320,
     summary: `Iteration 3 Agent Verdict: ${candidateReport.verdict} (${candidateReport.overallScore.toFixed(2)}/5.0). Verification Auditor Pass enforced 100% checkable evidence citation coverage across all 6 rubric dimensions.`,
+    isLiveAudit: !groundTruth,
   };
 }

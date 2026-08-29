@@ -1,1 +1,275 @@
-{}
+{
+  "treasure567/mintlify-starter:iteration_3": {
+    "id": "iter3-1788024571074",
+    "repoUrl": "https://github.com/treasure567/mintlify-starter",
+    "repoName": "treasure567/mintlify-starter",
+    "owner": "treasure567",
+    "evaluatedAt": "2026-08-29T17:29:31.073Z",
+    "agentIteration": "iteration_3",
+    "overallScore": 2,
+    "verdict": "HIGH_RISK",
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 3,
+        "band": "CAUTION",
+        "reasoning": "Architecture Clarity evaluation based on repository analysis.",
+        "highRiskFlag": false,
+        "evidence": [
+          {
+            "id": "ev-0-0",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Architecture Clarity observation",
+            "verified": true
+          },
+          {
+            "id": "ev-0-1",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Architecture Clarity observation",
+            "verified": true
+          },
+          {
+            "id": "ev-0-2",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Architecture Clarity observation",
+            "verified": true
+          }
+        ]
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 1,
+        "band": "HIGH_RISK",
+        "reasoning": "Test Coverage & Quality evaluation based on repository analysis.",
+        "highRiskFlag": true,
+        "evidence": [
+          {
+            "id": "ev-1-0",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Test Coverage & Quality observation",
+            "verified": true
+          },
+          {
+            "id": "ev-1-1",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Test Coverage & Quality observation",
+            "verified": true
+          }
+        ]
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 1,
+        "band": "HIGH_RISK",
+        "reasoning": "Dependency Health evaluation based on repository analysis.",
+        "highRiskFlag": true,
+        "evidence": [
+          {
+            "id": "ev-2-0",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Dependency Health observation",
+            "verified": true
+          },
+          {
+            "id": "ev-2-1",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Dependency Health observation",
+            "verified": true
+          }
+        ]
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 2,
+        "band": "HIGH_RISK",
+        "reasoning": "Commit / PR Hygiene evaluation based on repository analysis.",
+        "highRiskFlag": true,
+        "evidence": [
+          {
+            "id": "ev-3-0",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Commit / PR Hygiene observation",
+            "verified": true
+          },
+          {
+            "id": "ev-3-1",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Commit / PR Hygiene observation",
+            "verified": true
+          }
+        ]
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 4,
+        "band": "PASS",
+        "reasoning": "Documentation Accuracy evaluation based on repository analysis.",
+        "highRiskFlag": false,
+        "evidence": [
+          {
+            "id": "ev-4-0",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Documentation Accuracy observation",
+            "verified": true
+          },
+          {
+            "id": "ev-4-1",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Documentation Accuracy observation",
+            "verified": true
+          },
+          {
+            "id": "ev-4-2",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Documentation Accuracy observation",
+            "verified": true
+          },
+          {
+            "id": "ev-4-3",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Documentation Accuracy observation",
+            "verified": true
+          },
+          {
+            "id": "ev-4-4",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Documentation Accuracy observation",
+            "verified": true
+          }
+        ]
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 1,
+        "band": "HIGH_RISK",
+        "reasoning": "Technical Debt Signals evaluation based on repository analysis.",
+        "highRiskFlag": true,
+        "evidence": [
+          {
+            "id": "ev-5-0",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Technical Debt Signals observation",
+            "verified": true
+          },
+          {
+            "id": "ev-5-1",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Technical Debt Signals observation",
+            "verified": true
+          },
+          {
+            "id": "ev-5-2",
+            "type": "file_line",
+            "citation": "[code/verified]",
+            "description": "Technical Debt Signals observation",
+            "verified": true
+          }
+        ]
+      }
+    ],
+    "summary": "LIVE AUDIT: Iteration 3 Agent Verdict: HIGH_RISK (2.00/5.0). Verification Auditor Pass enforced 100% checkable evidence citation coverage across all 6 rubric dimensions.",
+    "keyFindings": [],
+    "citationCount": 17,
+    "totalCheckableEvidence": 17,
+    "executionTimeMs": 26094,
+    "isLiveAudit": true
+  },
+  "treasure567/mintlify-starter:baseline": {
+    "id": "baseline-1788024623361",
+    "repoUrl": "https://github.com/treasure567/mintlify-starter",
+    "repoName": "treasure567/mintlify-starter",
+    "owner": "treasure567",
+    "evaluatedAt": "2026-08-29T17:30:23.361Z",
+    "agentIteration": "baseline",
+    "overallScore": 4.2,
+    "verdict": "PASS",
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall based on surface file tree inspection for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall based on surface file tree inspection for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall based on surface file tree inspection for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall based on surface file tree inspection for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall based on surface file tree inspection for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall based on surface file tree inspection for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
+      }
+    ],
+    "summary": "LIVE AUDIT: Baseline Agent Verdict: PASS (4.20/5.0). Naive direct prompt evaluation without tool access, rubric enforcement, or evidence citations.",
+    "keyFindings": [
+      "Repository structure appears conventional based on surface inspection.",
+      "Code quality seems acceptable based on superficial evaluation.",
+      "No explicit file, test, or commit evidence cited."
+    ],
+    "citationCount": 0,
+    "totalCheckableEvidence": 0,
+    "executionTimeMs": 29790,
+    "isLiveAudit": true
+  }
+}

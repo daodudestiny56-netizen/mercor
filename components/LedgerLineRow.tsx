@@ -38,10 +38,43 @@ export const LedgerLineRow: React.FC<LedgerLineRowProps> = ({ dimension }) => {
           <p className="text-sm text-[#15181F]/80 mt-1 font-sans">
             {dimension.reasoning}
           </p>
+
+          {/* Strengths & Concerns Breakdown */}
+          {((dimension.strengths && dimension.strengths.length > 0) || (dimension.concerns && dimension.concerns.length > 0)) && (
+            <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-2 text-xs font-mono">
+              {dimension.strengths && dimension.strengths.length > 0 && (
+                <div className="bg-[#1E8E5A]/10 border border-[#1E8E5A]/30 p-2 rounded-sm">
+                  <span className="font-bold text-[#1E8E5A] block mb-1">STRENGTHS</span>
+                  <ul className="space-y-1 text-[#15181F]/90">
+                    {dimension.strengths.map((s, sIdx) => (
+                      <li key={sIdx} className="flex items-start gap-1.5">
+                        <span className="text-[#1E8E5A] font-bold">+</span>
+                        <span>{s}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {dimension.concerns && dimension.concerns.length > 0 && (
+                <div className="bg-[#C43B3B]/10 border border-[#C43B3B]/30 p-2 rounded-sm">
+                  <span className="font-bold text-[#C43B3B] block mb-1">CONCERNS</span>
+                  <ul className="space-y-1 text-[#15181F]/90">
+                    {dimension.concerns.map((c, cIdx) => (
+                      <li key={cIdx} className="flex items-start gap-1.5">
+                        <span className="text-[#C43B3B] font-bold">-</span>
+                        <span>{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {primaryEvidence ? (
-          <div className="flex flex-col items-start md:items-end">
+          <div className="flex flex-col items-start md:items-end self-start md:self-auto">
             <span className="text-xs font-mono font-bold text-[#5A5E6B] bg-[#2A2E38]/10 px-2 py-1 border border-[#2A2E38]/20">
               {primaryEvidence.citation}
             </span>

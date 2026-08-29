@@ -84,6 +84,26 @@ export const InspectionCertificate: React.FC<InspectionCertificateProps> = ({ re
         </div>
       )}
 
+      {/* Notable Files & Repository Artifacts */}
+      {report.notableFiles && report.notableFiles.length > 0 && (
+        <div className="mb-8 border-2 border-[#2A2E38] bg-white p-5 shadow-[4px_4px_0px_0px_#2A2E38]">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-[#15181F] mb-3 flex items-center gap-2" style={{ fontFamily: 'var(--font-bricolage), sans-serif' }}>
+            <FileCheck className="w-4 h-4 text-[#1E8E5A]" />
+            NOTABLE FILES & CORE REPOSITORY ARTIFACTS
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono">
+            {report.notableFiles.map((item, idx) => (
+              <div key={idx} className="bg-[#2A2E38]/5 border border-[#2A2E38]/20 p-2.5 rounded-sm">
+                <div className="font-bold text-[#15181F] bg-[#2A2E38]/10 px-2 py-0.5 inline-block mb-1 border border-[#2A2E38]/20">
+                  {item.path}
+                </div>
+                <div className="text-[#5A5E6B]">{item.note}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Ledger Lines Header */}
       <div className="flex items-center justify-between border-b-2 border-[#2A2E38] pb-2 mb-2">
         <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#5A5E6B]">

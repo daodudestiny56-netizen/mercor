@@ -8,12 +8,15 @@ export interface ModelEvaluationOutput {
   verdict: ScoreBand;
   summary: string;
   keyFindings: string[];
+  notableFiles?: Array<{ path: string; note: string }>;
   dimensions: {
     key: DimensionKey;
     label: string;
     score: number;
     band: ScoreBand;
     reasoning: string;
+    strengths?: string[];
+    concerns?: string[];
     evidence: {
       citation: string;
       description: string;
@@ -23,7 +26,8 @@ export interface ModelEvaluationOutput {
 }
 
 export async function callModel(prompt: string, systemPrompt?: string): Promise<ModelEvaluationOutput | null> {
-  const defaultSystem = `You are a Senior Engineer Repository Inspector. You evaluate codebase quality against 6 rubric dimensions:
+  const defaultSystem = `You are a Senior Engineer Repository Inspector. You perform deep repository scans.
+You evaluate codebase quality across 6 rubric dimensions:
 1. Architecture Clarity (key: architecture_clarity)
 2. Test Coverage & Quality (key: test_coverage_quality)
 3. Dependency Health (key: dependency_health)
@@ -33,19 +37,22 @@ export async function callModel(prompt: string, systemPrompt?: string): Promise<
 
 Respond ONLY with valid JSON in this exact structure:
 {
-  "overallScore": 4.52,
+  "overallScore": 4.2,
   "verdict": "PASS",
-  "summary": "Executive summary paragraph...",
+  "summary": "Executive summary synthesizing findings...",
   "keyFindings": ["Finding 1", "Finding 2"],
+  "notableFiles": [{ "path": "src/index.ts", "note": "Main entry point with clean module structure" }],
   "dimensions": [
     {
       "key": "architecture_clarity",
       "label": "Architecture Clarity",
       "score": 4.5,
       "band": "PASS",
-      "reasoning": "Reasoning text...",
+      "reasoning": "Reasoning explaining why this score...",
+      "strengths": ["Clear modular layout under src/"],
+      "concerns": ["Slight tight coupling in core router"],
       "evidence": [
-        { "citation": "[file/path.ts#L10-L25]", "description": "Description of evidence" }
+        { "citation": "[src/index.ts#L10-L25]", "description": "Description of evidence" }
       ]
     }
   ]
@@ -56,6 +63,9 @@ Respond ONLY with valid JSON in this exact structure:
   for (const model of modelsToTry) {
     try {
       console.log(`[callModel] Invoking AgentRouter endpoint at ${baseURL}/chat/completions with model="${model}" (Key: ${apiKey.slice(0, 8)}...)...`);
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
 
       const res = await fetch(`${baseURL}/chat/completions`, {
         method: 'POST',
@@ -70,9 +80,13 @@ Respond ONLY with valid JSON in this exact structure:
             { role: 'system', content: systemPrompt || defaultSystem },
             { role: 'user', content: prompt },
           ],
+          max_tokens: 1000,
           temperature: 0.2,
         }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (!res.ok) {
         const errText = await res.text();
@@ -83,11 +97,18 @@ Respond ONLY with valid JSON in this exact structure:
       const data = await res.json();
       const content = data.choices?.[0]?.message?.content;
       if (content) {
-        // Clean JSON formatting fence if present
+        // Clean JSON formatting fence or extract JSON object substring
         const jsonStr = content.replace(/^```json\s*/i, '').replace(/^```\s*/, '').replace(/\s*```$/, '').trim();
-        const parsed = JSON.parse(jsonStr) as ModelEvaluationOutput;
-        console.log(`[callModel] SUCCESS via model="${model}". Overall Score: ${parsed.overallScore}, Verdict: ${parsed.verdict}`);
-        return parsed;
+        const jsonMatch = jsonStr.match(/\{[\s\S]*\}/);
+        const targetStr = jsonMatch ? jsonMatch[0] : jsonStr;
+
+        try {
+          const parsed = JSON.parse(targetStr) as ModelEvaluationOutput;
+          console.log(`[callModel] SUCCESS via model="${model}". Overall Score: ${parsed.overallScore || 'N/A'}, Verdict: ${parsed.verdict || 'N/A'}`);
+          return parsed;
+        } catch (parseErr) {
+          console.error(`[callModel] Could not parse JSON from model ${model} response:`, parseErr);
+        }
       }
     } catch (err) {
       console.error(`[callModel] Exception while calling ${model}:`, err);
@@ -102,7 +123,7 @@ export function formatModelDimensions(rawDims: any): DimensionEvaluation[] {
   if (!rawDims) return [];
 
   // Normalize raw dimensions input into a flat list of candidates
-  let rawList: Array<{ key?: string; label?: string; score?: number; reasoning?: string; description?: string; evidence?: any[] }> = [];
+  let rawList: Array<{ key?: string; label?: string; score?: number; reasoning?: string; description?: string; strengths?: any; concerns?: any; evidence?: any[] }> = [];
 
   if (Array.isArray(rawDims)) {
     rawList = rawDims;
@@ -113,6 +134,8 @@ export function formatModelDimensions(rawDims: any): DimensionEvaluation[] {
       score: typeof v === 'number' ? v : v?.score,
       reasoning: v?.reasoning || v?.description,
       description: v?.description,
+      strengths: v?.strengths,
+      concerns: v?.concerns,
       evidence: v?.evidence || [],
     }));
   }
@@ -155,6 +178,9 @@ export function formatModelDimensions(rawDims: any): DimensionEvaluation[] {
     const band: ScoreBand = clampedScore >= 4.0 ? 'PASS' : clampedScore >= 2.5 ? 'CAUTION' : 'HIGH_RISK';
     const reasoning = match?.reasoning || match?.description || `${cDim.label} evaluation based on repository analysis.`;
 
+    const strengths = Array.isArray(match?.strengths) ? match.strengths.map(String) : match?.strengths ? [String(match.strengths)] : [];
+    const concerns = Array.isArray(match?.concerns) ? match.concerns.map(String) : match?.concerns ? [String(match.concerns)] : [];
+
     const rawEvidence = match?.evidence || [];
     const evidence = (Array.isArray(rawEvidence) && rawEvidence.length > 0 ? rawEvidence : [{ citation: '[code/verified]', description: `${cDim.label} analysis` }]).map((e: any, eIdx: number) => ({
       id: `ev-${idx}-${eIdx}`,
@@ -170,6 +196,8 @@ export function formatModelDimensions(rawDims: any): DimensionEvaluation[] {
       score: clampedScore,
       band,
       reasoning,
+      strengths,
+      concerns,
       highRiskFlag: clampedScore <= 2.0,
       evidence,
     };

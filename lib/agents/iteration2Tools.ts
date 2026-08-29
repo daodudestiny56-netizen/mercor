@@ -20,17 +20,25 @@ EVERY score MUST cite specific, checkable evidence in the "evidence" array using
 
 IMPORTANT: Provide DISTINCT citations for each dimension based on relevant tool outputs (e.g. package.json for dependency_health, test files for test_coverage_quality, commit logs for commit_pr_hygiene).`;
 
-  const prompt = `Summarize software quality for repository "${repoName}".
-Tool Outputs Gathered:
-- Repository Name: ${repoMeta.repoName}
-- Stars: ${repoMeta.stars}
-- Open Issues: ${repoMeta.openIssues}
-- File Tree: ${JSON.stringify(repoMeta.fileTree)}
-- Package Manifest: ${JSON.stringify(repoMeta.packageManifest)}
-- Recent Commits: ${JSON.stringify(repoMeta.recentCommits)}
-- Test Files Detected: ${JSON.stringify(repoMeta.testFiles)}
+  const sampleFilesSnippet = Object.entries(repoMeta.sampleContents || {})
+    .map(([path, content]) => `--- File: ${path} ---\n${content.slice(0, 1500)}`)
+    .join('\n\n');
 
-Provide structured JSON evaluation with evidence citations.`;
+  const prompt = `Summarize software quality for repository "${repoName}".
+
+Recursive Git File Tree (${(repoMeta.fullGitTree || []).length} total files):
+${JSON.stringify((repoMeta.fullGitTree || []).slice(0, 40))}
+
+Sample Core Files & Manifests (${Object.keys(repoMeta.sampleContents || {}).length} representative files fetched):
+${sampleFilesSnippet}
+
+Recent Commit History:
+${JSON.stringify(repoMeta.recentCommits)}
+
+Evaluate the codebase across all 6 rubric dimensions with rich per-dimension written breakdowns:
+- Provide specific reasoning citing actual line numbers or code patterns found in the sample files above.
+- List 1-3 specific "strengths" and 1-3 specific "concerns" for each dimension.
+- Include a top-level "notableFiles" array referencing key paths discovered with a one-line description of why.`;
 
   const modelResult = await callModel(prompt, systemPrompt);
 
@@ -54,6 +62,7 @@ Provide structured JSON evaluation with evidence citations.`;
       dimensions: formattedDimensions,
       summary: `Iteration 2 Agent Verdict: ${verdict} (${overallScore.toFixed(2)}/5.0). ${modelResult.summary}`,
       keyFindings: modelResult.keyFindings || [],
+      notableFiles: modelResult.notableFiles || [],
       citationCount,
       totalCheckableEvidence: citationCount,
       executionTimeMs: Date.now() - startTime,

@@ -23,6 +23,8 @@ export interface DimensionEvaluation {
   band: ScoreBand;
   evidence: EvidenceCitation[];
   reasoning: string;
+  strengths?: string[];
+  concerns?: string[];
   highRiskFlag: boolean;
 }
 
@@ -38,6 +40,7 @@ export interface AuditReport {
   dimensions: DimensionEvaluation[];
   summary: string;
   keyFindings: string[];
+  notableFiles?: Array<{ path: string; note: string }>;
   citationCount: number;
   totalCheckableEvidence: number;
   executionTimeMs: number;

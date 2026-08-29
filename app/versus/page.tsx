@@ -5,6 +5,16 @@ import { AuditReport } from '@/lib/types';
 import { VerdictStamp } from '@/components/VerdictStamp';
 import { Swords, Search, Trophy, Loader2, ArrowRight, ShieldCheck } from 'lucide-react';
 
+function parseRepoSlug(input: string): string {
+  const trimmed = input.trim();
+  const matches = trimmed.match(/(?:github\.com\/)?([a-zA-Z0-9_\-.]+)\/([a-zA-Z0-9_\-.]+)/g);
+  if (matches && matches.length > 0) {
+    const lastMatch = matches[matches.length - 1];
+    return lastMatch.replace(/^github\.com\//, '').replace(/\/+$/, '');
+  }
+  return trimmed.replace(/^https?:\/\/github\.com\//, '').replace(/\/+$/, '');
+}
+
 export default function VersusPage() {
   const [repoAInput, setRepoAInput] = useState('expressjs/express');
   const [repoBInput, setRepoBInput] = useState('fastify/fastify');
@@ -13,12 +23,10 @@ export default function VersusPage() {
   const [reportA, setReportA] = useState<AuditReport | null>(null);
   const [reportB, setReportB] = useState<AuditReport | null>(null);
 
-  const handleRunVersus = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
+  const executeBattle = async (inputA: string, inputB: string) => {
     setLoading(true);
-
-    const cleanA = repoAInput.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/+$/, '');
-    const cleanB = repoBInput.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/+$/, '');
+    const cleanA = parseRepoSlug(inputA);
+    const cleanB = parseRepoSlug(inputB);
 
     try {
       const [resA, resB] = await Promise.all([
@@ -44,6 +52,11 @@ export default function VersusPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleRunVersus = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    executeBattle(repoAInput, repoBInput);
   };
 
   const winner = reportA && reportB
@@ -117,19 +130,19 @@ export default function VersusPage() {
         <div className="flex flex-wrap items-center gap-2 text-xs font-mono pt-2 border-t-2 border-[#2A2E38]/10">
           <span className="text-[#5A5E6B] font-bold uppercase">Popular Rivalries:</span>
           <button
-            onClick={() => { setRepoAInput('expressjs/express'); setRepoBInput('fastify/fastify'); }}
+            onClick={() => { setRepoAInput('expressjs/express'); setRepoBInput('fastify/fastify'); executeBattle('expressjs/express', 'fastify/fastify'); }}
             className="px-2.5 py-1 bg-white border border-[#2A2E38] hover:bg-[#2A2E38] hover:text-[#F7F5EE] transition-colors"
           >
             Express vs Fastify
           </button>
           <button
-            onClick={() => { setRepoAInput('pallets/flask'); setRepoBInput('tiangolo/fastapi'); }}
+            onClick={() => { setRepoAInput('pallets/flask'); setRepoBInput('tiangolo/fastapi'); executeBattle('pallets/flask', 'tiangolo/fastapi'); }}
             className="px-2.5 py-1 bg-white border border-[#2A2E38] hover:bg-[#2A2E38] hover:text-[#F7F5EE] transition-colors"
           >
             Flask vs FastAPI
           </button>
           <button
-            onClick={() => { setRepoAInput('facebook/react'); setRepoBInput('vuejs/core'); }}
+            onClick={() => { setRepoAInput('facebook/react'); setRepoBInput('vuejs/core'); executeBattle('facebook/react', 'vuejs/core'); }}
             className="px-2.5 py-1 bg-white border border-[#2A2E38] hover:bg-[#2A2E38] hover:text-[#F7F5EE] transition-colors"
           >
             React vs Vue

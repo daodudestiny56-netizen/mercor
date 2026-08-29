@@ -122,9 +122,23 @@ export const InspectionCertificate: React.FC<InspectionCertificateProps> = ({ re
       </div>
 
       {/* Certificate Footer */}
-      <div className="border-t-4 border-[#2A2E38] pt-4 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-[#5A5E6B] gap-2">
+      <div className="border-t-4 border-[#2A2E38] pt-4 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-[#5A5E6B] gap-3">
         <span>CERTIFICATE ID: {report.id}</span>
-        <span>BENCHMARKED AGAINST REAL EXPERT GROUND TRUTH AUDITS</span>
+        
+        {/* Copy README Badge Button */}
+        <button
+          onClick={() => {
+            const badgeColor = report.verdict === 'PASS' ? 'brightgreen' : report.verdict === 'CAUTION' ? 'orange' : 'red';
+            const badgeMd = `[![Repo Quality Audit](https://img.shields.io/badge/Repo_Quality_Audit-${report.overallScore.toFixed(2)}_--_${report.verdict}-${badgeColor})](https://github.com/${report.repoName})`;
+            navigator.clipboard.writeText(badgeMd);
+            alert('Copied GitHub README Badge Markdown to Clipboard!\n\n' + badgeMd);
+          }}
+          className="px-3 py-1.5 bg-[#2A2E38] text-[#F7F5EE] border border-[#15181F] font-mono font-bold text-[11px] uppercase tracking-wider hover:bg-[#1E8E5A] transition-colors shadow-[2px_2px_0px_0px_#15181F] flex items-center gap-1.5"
+        >
+          <Hash className="w-3.5 h-3.5 text-[#1E8E5A]" />
+          <span>COPY README BADGE</span>
+        </button>
+
         <span>REPO QUALITY REVIEWER v1.0</span>
       </div>
     </div>

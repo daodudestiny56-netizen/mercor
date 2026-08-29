@@ -94,3 +94,24 @@ export async function fetchRepoMetadata(repoUrl: string): Promise<RawRepoData> {
     testFiles: ['test/app.test.js'],
   };
 }
+
+export async function checkRepoExists(repoSlug: string): Promise<boolean> {
+  const cleanUrl = repoSlug.trim().replace(/\/$/, '').replace(/^https?:\/\/github\.com\//, '');
+  const [owner, name] = cleanUrl.split('/');
+  if (!owner || !name) return false;
+
+  const headers: Record<string, string> = {
+    'User-Agent': 'RepoInspector-Agent/1.0',
+  };
+
+  if (process.env.GITHUB_TOKEN) {
+    headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+  }
+
+  try {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${name}`, { headers });
+    return res.status === 200;
+  } catch {
+    return false;
+  }
+}

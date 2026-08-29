@@ -206,27 +206,27 @@ function InspectorContent() {
           </div>
         </div>
       ) : notAudited ? (
-        /* PRIORITY 1 HONEST NOT AUDITED UI SCREEN */
+        /* REPOSITORY NOT FOUND ON GITHUB UI SCREEN */
         <div className="w-full bg-white border-4 border-[#2A2E38] p-8 shadow-[8px_8px_0px_0px_#2A2E38] space-y-6">
           <div className="flex items-center gap-3 border-b-2 border-[#2A2E38] pb-4">
-            <div className="p-2 bg-[#D98E1E] text-white">
+            <div className="p-2 bg-[#C43B3B] text-white">
               <AlertTriangle className="w-6 h-6" />
             </div>
             <div>
-              <div className="text-xs font-mono font-bold uppercase text-[#D98E1E]">AUDIT STATUS: NOT AUDITED</div>
+              <div className="text-xs font-mono font-bold uppercase text-[#C43B3B]">AUDIT STATUS: REPOSITORY NOT FOUND</div>
               <h2 className="text-2xl font-black text-[#15181F]" style={{ fontFamily: 'var(--font-bricolage), sans-serif' }}>
-                Repository &ldquo;{selectedRepo}&rdquo; Has Not Been Audited
+                Repository &ldquo;{selectedRepo}&rdquo; Not Found on GitHub
               </h2>
             </div>
           </div>
 
           <p className="text-base text-[#15181F]/90 leading-relaxed font-sans">
-            This repository is not in our 10-repository ground-truth benchmark suite. To ensure 100% evidence verification accuracy, we currently evaluate the pre-audited 10 repositories below:
+            We checked the GitHub API, but could not find a public repository matching <code className="font-mono bg-[#2A2E38]/10 px-1 py-0.5">{selectedRepo}</code>. Please verify the owner/name format (e.g., <code className="font-mono bg-[#2A2E38]/10 px-1 py-0.5">facebook/react</code>) or select one of our 10 ground-truth benchmarked repositories below:
           </p>
 
           <div className="bg-[#F7F5EE] border-2 border-[#2A2E38] p-5 space-y-3">
             <div className="text-xs font-mono font-bold uppercase text-[#5A5E6B]">
-              SUPPORTED BENCHMARK REPOSITORIES (SELECT TO AUDIT):
+              SELECT A BENCHMARKED REPOSITORY TO INSPECT:
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {sampleRepos.map((repo) => (

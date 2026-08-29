@@ -18,14 +18,25 @@ export const InspectionCertificate: React.FC<InspectionCertificateProps> = ({ re
         <div>
           <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-[#5A5E6B] uppercase mb-1">
             <ShieldCheck className="w-4 h-4 text-[#1E8E5A]" />
-            OFFICIAL SENIOR ENGINEER REPOSITORY QUALITY CERTIFICATE
+            {report.isLiveAudit ? 'LIVE ON-DEMAND REPOSITORY AUDIT (NO GROUND-TRUTH COMPARISON)' : 'OFFICIAL BENCHMARKED REPOSITORY QUALITY CERTIFICATE'}
           </div>
-          <h1
-            className="text-3xl md:text-5xl font-black tracking-tight text-[#15181F]"
-            style={{ fontFamily: 'var(--font-bricolage), sans-serif' }}
-          >
-            {report.repoName}
-          </h1>
+          <div className="flex items-center gap-3">
+            <h1
+              className="text-3xl md:text-5xl font-black tracking-tight text-[#15181F]"
+              style={{ fontFamily: 'var(--font-bricolage), sans-serif' }}
+            >
+              {report.repoName}
+            </h1>
+            {report.isLiveAudit ? (
+              <span className="px-3 py-1 text-xs font-mono font-bold uppercase bg-[#D97706] text-white border-2 border-[#2A2E38] shadow-[2px_2px_0px_0px_#2A2E38]">
+                LIVE AUDIT
+              </span>
+            ) : (
+              <span className="px-3 py-1 text-xs font-mono font-bold uppercase bg-[#1E8E5A] text-white border-2 border-[#2A2E38] shadow-[2px_2px_0px_0px_#2A2E38]">
+                BENCHMARKED
+              </span>
+            )}
+          </div>
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#5A5E6B] mt-2">
             <span className="flex items-center gap-1">
               <Clock className="w-3.5 h-3.5" /> AUDITED: {new Date(report.evaluatedAt).toLocaleDateString()}

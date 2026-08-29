@@ -5,9 +5,13 @@
 
 ---
 
-## Executive Summary
+## Executive Summary & Product Architecture
 
-`repo-inspector` evaluates software repositories the way a senior staff engineer would — checking architecture clarity, test suite coverage, dependency health, commit hygiene, documentation accuracy, and technical debt signals. Rather than relying on superficial README impressions or star counts, `repo-inspector` enforces checkable evidence citations (`[file:line]`, `[test:result]`, `[commit:hash]`) backed by a 4-stage agent pipeline.
+`repo-inspector` evaluates software repositories the way a senior staff engineer would — checking architecture clarity, test suite coverage, dependency health, commit hygiene, documentation accuracy, and technical debt signals.
+
+The application explicitly separates two distinct product tiers:
+1. **Tier 1: Benchmarked Core (The 10 Repos)** — Evaluated against manual expert ground truth with measured accuracy metrics, displaying a green `BENCHMARKED VERIFIED` seal.
+2. **Tier 2: Live Audit (Any Public Repo)** — Evaluated on-demand through the live 4-stage agent pipeline (`baseline` → `iter1` → `iter2` → `iter3`) on GitHub metadata, displaying an amber `LIVE AUDIT` seal explicitly framing the agent's independent verdict without ground-truth comparison claims.
 
 ---
 

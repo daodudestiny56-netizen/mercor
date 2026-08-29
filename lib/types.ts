@@ -41,6 +41,7 @@ export interface AuditReport {
   citationCount: number;
   totalCheckableEvidence: number;
   executionTimeMs: number;
+  isLiveAudit?: boolean;
 }
 
 export interface BenchmarkRepoComparison {

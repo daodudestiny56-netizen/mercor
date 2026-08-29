@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { AuditReport } from '@/lib/types';
 import { VerdictStamp } from './VerdictStamp';

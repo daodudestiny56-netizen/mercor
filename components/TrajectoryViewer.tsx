@@ -14,7 +14,6 @@ export const TrajectoryViewer: React.FC<TrajectoryViewerProps> = ({ repoName, st
   const currentStep = steps[selectedStepIndex] || steps[0];
 
   return (
-  return (
     <div className="w-full bg-[#F7F5EE] border-4 border-[#2A2E38] p-4 sm:p-6 shadow-[4px_4px_0px_0px_#2A2E38] sm:shadow-[8px_8px_0px_0px_#2A2E38] font-sans my-4 sm:my-8 overflow-hidden">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b-4 border-[#2A2E38] pb-4 mb-4 sm:mb-6 gap-3 sm:gap-4">
         <div>

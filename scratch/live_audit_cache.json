@@ -671,5 +671,129 @@
     "totalCheckableEvidence": 6,
     "executionTimeMs": 31341,
     "isLiveAudit": true
+  },
+  "fastify/fastify:iteration_3": {
+    "id": "iter3-1788027036425",
+    "repoUrl": "https://github.com/fastify/fastify",
+    "repoName": "fastify/fastify",
+    "owner": "fastify",
+    "evaluatedAt": "2026-08-29T18:10:36.423Z",
+    "agentIteration": "iteration_3",
+    "overallScore": 3.72,
+    "verdict": "CAUTION",
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 4,
+        "band": "PASS",
+        "reasoning": "Repository structural analysis of top-level directory layout (.borp.yaml, .editorconfig, .gitattributes, .github, .gitignore).",
+        "evidence": [
+          {
+            "id": "ev-arch-1",
+            "type": "file_line",
+            "citation": "[README.md]",
+            "description": "Top-level directory structure",
+            "verified": true
+          }
+        ],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 3.5,
+        "band": "CAUTION",
+        "reasoning": "Test suite files detected: .github/workflows/test-compare.yml, docs/Guides/Testing.md, integration/test.sh, test/404s.test.js, test/500s.test.js, test/allow-unsafe-regex.test.js, test/als.test.js, test/async-await.test.js, test/async-dispose.test.js, test/async_hooks.test.js, test/body-limit.test.js, test/buffer.test.js, test/build-certificate.js, test/build/error-serializer.test.js, test/build/version.test.js, test/bundler/README.md, test/bundler/esbuild/bundler-test.js, test/bundler/esbuild/package.json, test/bundler/esbuild/src/fail-plugin-version.js, test/bundler/esbuild/src/index.js, test/bundler/webpack/bundler-test.js, test/bundler/webpack/package.json, test/bundler/webpack/src/fail-plugin-version.js, test/bundler/webpack/src/index.js, test/bundler/webpack/webpack.config.js, test/case-insensitive.test.js, test/chainable.test.js, test/child-logger-factory.test.js, test/client-timeout.test.js, test/close-pipelining.test.js, test/close.test.js, test/conditional-pino.test.js, test/connection-timeout.test.js, test/constrained-routes.test.js, test/content-length.test.js, test/content-parser.test.js, test/content-type.test.js, test/context-config.test.js, test/custom-http-server.test.js, test/custom-parser-async.test.js, test/custom-parser.0.test.js, test/custom-parser.1.test.js, test/custom-parser.2.test.js, test/custom-parser.3.test.js, test/custom-parser.4.test.js, test/custom-parser.5.test.js, test/custom-querystring-parser.test.js, test/decorator-instance-properties.test.js, test/decorator.test.js, test/delete.test.js, test/diagnostics-channel/404.test.js, test/diagnostics-channel/async-delay-request.test.js, test/diagnostics-channel/async-error-handler.test.js, test/diagnostics-channel/async-request.test.js, test/diagnostics-channel/error-before-handler.test.js, test/diagnostics-channel/error-request.test.js, test/diagnostics-channel/error-status.test.js, test/diagnostics-channel/init.test.js, test/diagnostics-channel/sync-delay-request.test.js, test/diagnostics-channel/sync-request-reply.test.js, test/diagnostics-channel/sync-request.test.js, test/encapsulated-child-logger-factory.test.js, test/encapsulated-error-handler.test.js, test/esm/errorCodes.test.mjs, test/esm/esm.test.mjs, test/esm/index.test.js, test/esm/named-exports.mjs, test/esm/other.mjs, test/esm/plugin.mjs, test/fastify-instance.test.js, test/find-route.test.js, test/fix-6411.test.js, test/fix-root-primitive-coercion.test.js, test/fluent-schema.test.js, test/genReqId.test.js, test/handler-context.test.js, test/handler-timeout.test.js, test/has-route.test.js, test/header-overflow.test.js, test/helper.js, test/hooks-async.test.js, test/hooks.on-listen.test.js, test/hooks.on-ready.test.js, test/hooks.test.js, test/http-methods/copy.test.js, test/http-methods/custom-http-methods.test.js, test/http-methods/get.test.js, test/http-methods/head.test.js, test/http-methods/lock.test.js, test/http-methods/mkcalendar.test.js, test/http-methods/mkcol.test.js, test/http-methods/move.test.js, test/http-methods/propfind.test.js, test/http-methods/proppatch.test.js, test/http-methods/report.test.js, test/http-methods/search.test.js, test/http-methods/trace.test.js, test/http-methods/unlock.test.js, test/http2/closing.test.js, test/http2/constraint.test.js, test/http2/head.test.js, test/http2/plain.test.js, test/http2/secure-with-fallback.test.js, test/http2/secure.test.js, test/http2/unknown-http-method.test.js, test/https/custom-https-server.test.js, test/https/https.test.js, test/imports.test.js, test/inject.test.js, test/input-validation.js, test/internals/all.test.js, test/internals/content-type-parser.test.js, test/internals/context.test.js, test/internals/decorator.test.js, test/internals/errors.test.js, test/internals/handle-request.test.js, test/internals/hook-runner.test.js, test/internals/hooks.test.js, test/internals/initial-config.test.js, test/internals/logger.test.js, test/internals/plugin.test.js, test/internals/reply-serialize.test.js, test/internals/reply.test.js, test/internals/req-id-gen-factory.test.js, test/internals/request-validate.test.js, test/internals/request.test.js, test/internals/schema-controller-perf.test.js, test/internals/server.test.js, test/internals/validation.test.js, test/issue-4959.test.js, test/keep-alive-timeout.test.js, test/listen.1.test.js, test/listen.2.test.js, test/listen.3.test.js, test/listen.4.test.js, test/listen.5.test.js, test/logger/instantiation.test.js, test/logger/logger-test-utils.js, test/logger/logging.test.js, test/logger/options.test.js, test/logger/request.test.js, test/logger/response.test.js, test/logger/tap-parallel-not-ok, test/max-requests-per-socket.test.js, test/middleware.test.js, test/noop-set.test.js, test/nullable-validation.test.js, test/options.error-handler.test.js, test/options.test.js, test/output-validation.test.js, test/patch.error-handler.test.js, test/patch.test.js, test/plugin.1.test.js, test/plugin.2.test.js, test/plugin.3.test.js, test/plugin.4.test.js, test/plugin.helper.js, test/plugin.name.display.js, test/post-empty-body.test.js, test/pretty-print.test.js, test/promises.test.js, test/proto-poisoning.test.js, test/put.error-handler.test.js, test/put.test.js, test/register.test.js, test/reply-code.test.js, test/reply-early-hints.test.js, test/reply-error.test.js, test/reply-media-type.test.js, test/reply-trailers.test.js, test/reply-web-stream-locked.test.js, test/request-error.test.js, test/request-header-host.test.js, test/request-id.test.js, test/request-media-type.test.js, test/request-port.test.js, test/request-timeout.test.js, test/rfc-10008.test.js, test/route-hooks.test.js, test/route-prefix.test.js, test/route-shorthand.test.js, test/route.1.test.js, test/route.2.test.js, test/route.3.test.js, test/route.4.test.js, test/route.5.test.js, test/route.6.test.js, test/route.7.test.js, test/route.8.test.js, test/router-options.test.js, test/same-shape.test.js, test/schema-examples.test.js, test/schema-feature.test.js, test/schema-serialization.test.js, test/schema-special-usage.test.js, test/schema-validation.test.js, test/scripts/validate-ecosystem-links.test.js, test/serialize-response.test.js, test/server.test.js, test/set-error-handler.test.js, test/skip-reply-send.test.js, test/stream-serializers.test.js, test/stream.1.test.js, test/stream.2.test.js, test/stream.3.test.js, test/stream.4.test.js, test/stream.5.test.js, test/sync-routes.test.js, test/throw.test.js, test/trust-proxy.test.js, test/type-provider.test.js, test/types/content-type-parser.tst.ts, test/types/decorate-request-reply.tst.ts, test/types/dummy-plugin.mts, test/types/errors.tst.ts, test/types/fastify.tst.ts, test/types/hooks.tst.ts, test/types/instance.tst.ts, test/types/logger.tst.ts, test/types/plugin.tst.ts, test/types/register.tst.ts, test/types/reply.tst.ts, test/types/request.tst.ts, test/types/route.tst.ts, test/types/schema.tst.ts, test/types/serverFactory.tst.ts, test/types/tsconfig.json, test/types/type-provider.tst.ts, test/types/using.tst.ts, test/upgrade.test.js, test/url-rewriting.test.js, test/use-semicolon-delimiter.test.js, test/validation-error-handling.test.js, test/versioned-routes.test.js, test/web-api.test.js, test/wrap-thenable.test.js.",
+        "evidence": [
+          {
+            "id": "ev-test-1",
+            "type": "file_line",
+            "citation": "[.github/workflows/test-compare.yml]",
+            "description": "Detected test suite file",
+            "verified": true
+          }
+        ],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 3.5,
+        "band": "CAUTION",
+        "reasoning": "Package manifest detected (package.json).",
+        "evidence": [
+          {
+            "id": "ev-dep-1",
+            "type": "dep_manifest",
+            "citation": "[package.json]",
+            "description": "Package manifest configuration",
+            "verified": true
+          }
+        ],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 3.8,
+        "band": "CAUTION",
+        "reasoning": "Scanned recent repository commits. Latest: \"docs(ecosystem): remove deprecated http-wizard and rename fastify-better-sqlite3 (#6972)\".",
+        "evidence": [
+          {
+            "id": "ev-git-1",
+            "type": "commit_hash",
+            "citation": "[commit: 1beaf7e]",
+            "description": "docs(ecosystem): remove deprecated http-wizard and rename fastify-better-sqlite3 (#6972)",
+            "verified": true
+          }
+        ],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 4,
+        "band": "PASS",
+        "reasoning": "Documentation file verified in repository root (README.md).",
+        "evidence": [
+          {
+            "id": "ev-doc-1",
+            "type": "file_line",
+            "citation": "[README.md]",
+            "description": "Verified repository documentation file",
+            "verified": true
+          }
+        ],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 3.5,
+        "band": "CAUTION",
+        "reasoning": "Codebase structural complexity scan across 31 top-level items.",
+        "evidence": [
+          {
+            "id": "ev-debt-1",
+            "type": "file_line",
+            "citation": "[README.md]",
+            "description": "Repository structure scan",
+            "verified": true
+          }
+        ],
+        "highRiskFlag": false
+      }
+    ],
+    "summary": "LIVE AUDIT: Iteration 3 Agent Verdict: CAUTION (3.72/5.0). Verification Auditor Pass enforced 100% checkable evidence citation coverage across all 6 rubric dimensions.",
+    "keyFindings": [
+      "Test files verified: .github/workflows/test-compare.yml",
+      "Latest commit: 1beaf7e (\"docs(ecosystem): remove deprecated http-wizard and rename fastify-better-sqlite3 (#6972)\")",
+      "Documentation file verified: README.md"
+    ],
+    "citationCount": 6,
+    "totalCheckableEvidence": 6,
+    "executionTimeMs": 31829,
+    "isLiveAudit": true
   }
 }

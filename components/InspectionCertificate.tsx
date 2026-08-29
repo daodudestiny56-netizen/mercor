@@ -19,7 +19,7 @@ export const InspectionCertificate: React.FC<InspectionCertificateProps> = ({ re
       .map(d => `| **${d.label}** | \`${d.score.toFixed(1)}/5.0\` | **${d.band}** | ${d.reasoning} |`)
       .join('\n');
 
-    const prMd = `## 🛡️ Senior Engineer Quality Audit Certificate
+    const prMd = `## Senior Engineer Quality Audit Certificate
 **Repository:** \`${report.repoName}\`  
 **Overall Verdict:** \`${report.verdict}\` (${report.overallScore.toFixed(2)} / 5.00)  
 **Audited Date:** ${new Date(report.evaluatedAt).toLocaleDateString()}  

@@ -53,7 +53,7 @@ async function main() {
   fs.writeFileSync(path.join(trajectoriesDir, 'agent_traces.json'), JSON.stringify(agentTraces, null, 2));
   fs.writeFileSync(path.join(trajectoriesDir, 'baseline_traces.json'), JSON.stringify(baselineTraces, null, 2));
 
-  console.log('\n✓ Live execution traces saved to trajectories/agent_traces.json & trajectories/baseline_traces.json');
+  console.log('\n[OK] Live execution traces saved to trajectories/agent_traces.json & trajectories/baseline_traces.json');
 }
 
 main().catch(console.error);

@@ -22,7 +22,7 @@ async function verifyDiverseLiveAudits() {
 
   console.log('\n--- DIVERSITY CHECK RESULT ---');
   if (reactReport?.overallScore !== vueReport?.overallScore) {
-    console.log('✓ DIVERSITY CONFIRMED: Scores are distinct per repository!');
+    console.log('[OK] DIVERSITY CONFIRMED: Scores are distinct per repository!');
   } else {
     console.log('Distinct score check finished.');
   }

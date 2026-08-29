@@ -81,7 +81,7 @@ export const LedgerLineRow: React.FC<LedgerLineRowProps> = ({ dimension, onInspe
               className="text-xs font-mono font-bold text-[#15181F] bg-[#2A2E38]/10 hover:bg-[#1E8E5A] hover:text-white px-2 py-1 border border-[#2A2E38]/30 transition-colors truncate max-w-full block text-left cursor-pointer"
               title="Click to view code citation snippet modal"
             >
-              🔍 {primaryEvidence.citation}
+              {primaryEvidence.citation}
             </button>
             <span
               className="text-[11px] font-mono text-[#5A5E6B] mt-0.5 truncate max-w-full block"

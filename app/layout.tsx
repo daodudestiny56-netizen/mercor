@@ -52,7 +52,13 @@ export default function RootLayout({
                 href="/inspector"
                 className="px-2.5 py-1.5 sm:px-3 sm:py-1.5 border border-[#F7F5EE]/30 hover:bg-[#F7F5EE] hover:text-[#15181F] transition-colors"
               >
-                Certificate Inspector
+                Inspector
+              </Link>
+              <Link
+                href="/versus"
+                className="px-2.5 py-1.5 sm:px-3 sm:py-1.5 border border-[#D98E1E] bg-[#D98E1E]/20 text-[#D98E1E] hover:bg-[#D98E1E] hover:text-white transition-colors"
+              >
+                Repo Versus
               </Link>
               <Link
                 href="/trajectories"

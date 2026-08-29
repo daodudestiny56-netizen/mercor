@@ -5,9 +5,10 @@ import { DimensionEvaluation } from '@/lib/types';
 
 interface LedgerLineRowProps {
   dimension: DimensionEvaluation;
+  onInspectCitation?: (citation: string, description: string) => void;
 }
 
-export const LedgerLineRow: React.FC<LedgerLineRowProps> = ({ dimension }) => {
+export const LedgerLineRow: React.FC<LedgerLineRowProps> = ({ dimension, onInspectCitation }) => {
   let stripeColor = 'bg-[#1E8E5A]';
   let badgeColor = 'bg-[#1E8E5A]/15 text-[#1E8E5A]';
 
@@ -75,12 +76,13 @@ export const LedgerLineRow: React.FC<LedgerLineRowProps> = ({ dimension }) => {
 
         {primaryEvidence ? (
           <div className="flex flex-col items-start md:items-end self-start md:self-auto max-w-full md:max-w-[280px] shrink-0">
-            <span
-              className="text-xs font-mono font-bold text-[#5A5E6B] bg-[#2A2E38]/10 px-2 py-1 border border-[#2A2E38]/20 truncate max-w-full block"
-              title={primaryEvidence.citation}
+            <button
+              onClick={() => onInspectCitation && onInspectCitation(primaryEvidence.citation, primaryEvidence.description)}
+              className="text-xs font-mono font-bold text-[#15181F] bg-[#2A2E38]/10 hover:bg-[#1E8E5A] hover:text-white px-2 py-1 border border-[#2A2E38]/30 transition-colors truncate max-w-full block text-left cursor-pointer"
+              title="Click to view code citation snippet modal"
             >
-              {primaryEvidence.citation}
-            </span>
+              🔍 {primaryEvidence.citation}
+            </button>
             <span
               className="text-[11px] font-mono text-[#5A5E6B] mt-0.5 truncate max-w-full block"
               title={primaryEvidence.description}

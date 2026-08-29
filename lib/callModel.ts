@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DimensionKey, ScoreBand, DimensionEvaluation } from './types';
 
 const apiKey = process.env.AGENTROUTER_API_KEY || 'sk-wRqtB4UzzCmWKf1YtwJ4K2UpK6plzi91uyumYyusxNkUHw9q';

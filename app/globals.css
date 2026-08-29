@@ -13,10 +13,18 @@
   --foreground: #15181F;
 }
 
+*, ::before, ::after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-jakarta), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .font-display {
@@ -26,3 +34,4 @@ body {
 .font-mono {
   font-family: var(--font-mono), monospace;
 }
+

@@ -29,7 +29,6 @@ export async function fetchRepoMetadata(repoUrl: string): Promise<RawRepoData> {
   const headers: Record<string, string> = {
     'User-Agent': 'RepoInspector-Agent/1.0',
   };
-
   if (process.env.GITHUB_TOKEN) {
     headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
   }
@@ -103,15 +102,15 @@ export async function checkRepoExists(repoSlug: string): Promise<boolean> {
   const headers: Record<string, string> = {
     'User-Agent': 'RepoInspector-Agent/1.0',
   };
-
   if (process.env.GITHUB_TOKEN) {
     headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
   }
 
   try {
     const res = await fetch(`https://api.github.com/repos/${owner}/${name}`, { headers });
-    return res.status === 200;
+    if (res.status === 404) return false;
+    return true;
   } catch {
-    return false;
+    return true;
   }
 }

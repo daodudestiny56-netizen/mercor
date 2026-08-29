@@ -47,24 +47,12 @@ export default function RootLayout({
               </div>
             </Link>
 
-            <nav className="flex flex-wrap items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider">
-              <Link
-                href="/"
-                className="px-3 py-1.5 border border-[#F7F5EE]/30 hover:bg-[#F7F5EE] hover:text-[#15181F] transition-colors"
-              >
-                Overview
-              </Link>
+            <nav className="flex flex-wrap items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider antialiased">
               <Link
                 href="/inspector"
                 className="px-3 py-1.5 border border-[#F7F5EE]/30 hover:bg-[#F7F5EE] hover:text-[#15181F] transition-colors"
               >
                 Certificate Inspector
-              </Link>
-              <Link
-                href="/benchmark"
-                className="px-3 py-1.5 border border-[#F7F5EE]/30 hover:bg-[#F7F5EE] hover:text-[#15181F] transition-colors"
-              >
-                10-Repo Benchmark
               </Link>
               <Link
                 href="/trajectories"

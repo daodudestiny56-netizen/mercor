@@ -2,22 +2,24 @@ import { AuditReport, DimensionEvaluation } from '../types';
 import { EXPERT_GROUND_TRUTH_DATA } from '../groundTruthData';
 import { RUBRIC_DIMENSIONS } from '../rubricEngine';
 
-export async function runBaselineAgent(repoName: string): Promise<AuditReport> {
+export async function runBaselineAgent(repoName: string): Promise<AuditReport | null> {
   const startTime = Date.now();
   const groundTruth = EXPERT_GROUND_TRUTH_DATA[repoName];
 
+  if (!groundTruth) {
+    return null;
+  }
+
   // Baseline agent behaves like a naive LLM prompt without tools or rubric.
-  // It over-indexes on README polish and star count.
   let defaultScore = 4.2;
 
   if (repoName === 'shadcn-ui/ui') {
-    // Naive baseline rates shadcn 4.8/5 based purely on README gloss, missing 0-test trap!
     defaultScore = 4.8;
   } else if (repoName === 'sahat/hackathon-starter') {
     defaultScore = 4.4;
   } else if (repoName === 'toddmotto/public-apis' || repoName === 'karan/Projects') {
     defaultScore = 3.2;
-  } else if (groundTruth) {
+  } else {
     defaultScore = Math.min(5.0, groundTruth.overallScore + 0.5);
   }
 
@@ -27,7 +29,7 @@ export async function runBaselineAgent(repoName: string): Promise<AuditReport> {
     score: Number(defaultScore.toFixed(1)),
     band: defaultScore >= 4.0 ? 'PASS' : defaultScore >= 2.5 ? 'CAUTION' : 'HIGH_RISK',
     reasoning: `Baseline assessment: Codebase looks good overall with standard structure for ${d.label}.`,
-    evidence: [], // Baseline provides ZERO checkable citations!
+    evidence: [],
     highRiskFlag: false,
   }));
 

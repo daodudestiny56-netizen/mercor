@@ -26,20 +26,22 @@ export async function fetchRepoMetadata(repoUrl: string): Promise<RawRepoData> {
   const [owner, name] = repoSlug.split('/');
   const fullRepoName = `${owner}/${name}`;
 
+  const headers: Record<string, string> = {
+    'User-Agent': 'RepoInspector-Agent/1.0',
+  };
+
+  if (process.env.GITHUB_TOKEN) {
+    headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+  }
+
   try {
-    const res = await fetch(`https://api.github.com/repos/${fullRepoName}`, {
-      headers: { 'User-Agent': 'RepoInspector-Agent/1.0' },
-    });
+    const res = await fetch(`https://api.github.com/repos/${fullRepoName}`, { headers });
     if (res.ok) {
       const data = await res.json();
-      const commitsRes = await fetch(`https://api.github.com/repos/${fullRepoName}/commits?per_page=5`, {
-        headers: { 'User-Agent': 'RepoInspector-Agent/1.0' },
-      });
+      const commitsRes = await fetch(`https://api.github.com/repos/${fullRepoName}/commits?per_page=5`, { headers });
       const commitsData = commitsRes.ok ? await commitsRes.json() : [];
 
-      const contentsRes = await fetch(`https://api.github.com/repos/${fullRepoName}/contents`, {
-        headers: { 'User-Agent': 'RepoInspector-Agent/1.0' },
-      });
+      const contentsRes = await fetch(`https://api.github.com/repos/${fullRepoName}/contents`, { headers });
       const contentsData = contentsRes.ok ? await contentsRes.json() : [];
 
       const fileTree = Array.isArray(contentsData) ? contentsData.map((c: { name: string }) => c.name) : [];

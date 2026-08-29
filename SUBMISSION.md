@@ -29,13 +29,17 @@ Below are direct links to the official submission deliverables for review and re
 When evaluating unfamiliar software (contractor deliverables, open-source dependencies, code bases during due diligence), READMEs and working demos reveal almost nothing about real maintainability or risk. Manual senior engineer audits take hours per repository.
 
 ### The Hot Take
-**Un-tooled LLMs are vulnerable to "README Gloss Bias."** Given a prompt alone, an LLM will award a 4.8/5.0 score to a repository with **0 automated unit tests** simply because the README features modern badges and Tailwind design templates. Real tool access and citation verification loops are mandatory for credible automated audits.
+> *"A fallback that silently substitutes a cached result for an unrecognized repo is indistinguishable from a real audit until someone checks—verification needs to confirm 'is this even the right repository,' not just 'is this individual citation real.'"*
 
-### Key Benchmark Performance (10 Ground-Truth Repositories)
+Un-tooled LLMs are vulnerable to "README Gloss Bias," awarding 4.8/5.0 to a 0-test repository simply because the README features modern badges and Tailwind design templates. Furthermore, system-level verification loops must explicitly verify repository identity to prevent silent data substitution.
+
+---
+
+## 📊 Key Benchmark Performance (10 Ground-Truth Repositories)
 
 | Metric | Baseline (Prompt Only) | Iteration 3 (Verified Tools) | Improvement |
 |---|---|---|---|
-| **Spearman Rank Correlation** | `0.412` | **`0.988`** | **+0.576** |
+| **Spearman Rank Correlation** | `0.412` | **`0.988`** | **+0.576 (140% gain)** |
 | **Pairwise Verdict Agreement** | `30.0%` | **`100.0%`** | **+70.0%** |
 | **Cited Evidence Compliance** | `0 / 10 (0%)` | **`10 / 10 (100%)`** | **+100.0%** |
 | **High Risk Detection Accuracy** | `20.0%` | **`100.0%`** | **+80.0%** |

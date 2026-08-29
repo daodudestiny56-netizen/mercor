@@ -13,7 +13,6 @@
 | **Iteration 1 — Better Context** | Feed agent explicit 6-dimension rubric definitions + file tree structure before scoring. | **Spearman Rank: 0.648** (+0.236)<br>Cited Evidence: 0 / 10 repos<br>High-Risk Accuracy: 40.0% | **KEPT.** Rubric definitions improved dimension score consistency, but lack of tool execution still left evidence un-cited. |
 | **Iteration 2 — Tool Access** | Grant real tool access (file reader, test detector, package inspector, git log scanner, tech debt scanner). | **Spearman Rank: 0.965** (+0.317)<br>Cited Evidence: 10 / 10 repos<br>High-Risk Accuracy: 90.0%<br>*Caught `shadcn-ui/ui` 0-test gap.* | **KEPT.** Tool access enabled real evidence discovery (`[file:line]`, `[test:result]`, `[commit:hash]`), correctly flagging hidden risks. |
 | **Iteration 3 — Verification Pass** | Add a second-pass Evidence Citation Auditor that rejects any score lacking a checkable citation and forces a retry loop. | **Spearman Rank: 0.988** (+0.023)<br>Cited Evidence: 10 / 10 repos (100% cited)<br>High-Risk Accuracy: 100.0% | **KEPT.** Completely eliminated un-cited scores and ensured 100% checkable evidence compliance across all 6 rubric dimensions. |
-| **Iteration 4 (Stretch Goal)** | Split into specialized sub-agents (`ArchChecker`, `TestChecker`, `HygieneChecker`) with synthesis engine. | **Spearman Rank: 0.988**<br>Execution Time: 3.2x higher | **REVISED / STRETCH.** Iteration 3 already achieved 0.988 rank correlation with 100% citation coverage. Kept multi-agent architecture streamlined to prevent latency bloat. |
 
 ---
 
@@ -36,10 +35,11 @@
 
 ---
 
-## Main Failure Mode & Hot Take
+## Main Failure Mode & Concrete Hot Take
 
 > [!WARNING]
-> **MAIN FAILURE MODE: README GLOSS BIAS**
-> Raw AI models without sandboxed static analysis and evidence verification loops are severely vulnerable to surface presentation. An un-tooled prompt will award 4.8/5.0 to a repository with zero automated unit tests simply because the README features professional badges and polished UI components.
+> **MAIN FAILURE MODE: SILENT FALLBACK FABRICATION & README GLOSS BIAS**
 >
-> **HOT TAKE:** *Raw test file counts and star metrics are bad proxies for codebase health. A test suite that never exercises real assertions on edge cases is worse than no tests because it creates a false sense of security. Verification loops with explicit file/line citation enforcement are mandatory for agentic code auditing.*
+> **HOT TAKE:** *"A fallback that silently substitutes a cached result for an unrecognized repo is indistinguishable from a real audit until someone checks—verification needs to confirm 'is this even the right repository,' not just 'is this individual citation real.'"*
+>
+> **Concrete Case Study**: During development, an early routing fallback pattern silently returned the cached `expressjs/express` audit labeled under any unrecognized repository input. The certificate was fully stamped with `PASS (4.52/5.0)` and cited valid line-items—for code that wasn't even the requested repository! We fixed this in Priority 1 by building an explicit **"NOT AUDITED"** status screen that lists the 10 supported benchmark repos honestly, proving that verification loops must check repository identity before running citation audits.

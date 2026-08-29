@@ -10,7 +10,8 @@
 - **Node.js**: v18.0.0 or higher (v24.x tested)
 - **npm**: v9.0.0 or higher
 - **OS**: Windows, macOS, or Linux
-- **Environment**: Clean shell / terminal session
+- **Environment Variables**:
+  - `GITHUB_TOKEN` *(Optional)*: Set in `.env.local` to increase GitHub API rate limits from 60/hr to 5,000/hr.
 
 ---
 
@@ -18,16 +19,19 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/user/repo-inspector.git
-cd repo-inspector
+git clone https://github.com/daodudestiny56-netizen/mercor.git
+cd mercor
 
 # Install dependencies
 npm install
+
+# Setup environment variables (optional)
+cp .env.example .env.local
 ```
 
 ---
 
-## 3. Running the Live Application & Benchmark Suite
+## 3. Running the Application & Benchmark Suite
 
 ### Option A: Interactive Web UI
 
@@ -38,11 +42,12 @@ npm run dev
 # Open http://localhost:3000 in browser
 ```
 
-1. **Certificate Inspector**: Navigate to `http://localhost:3000/` to test live repository auditing and toggle between Baseline, Iteration 1, Iteration 2, and Iteration 3.
-2. **10-Repo Benchmark**: Navigate to `http://localhost:3000/benchmark` to view the 10-repo ground-truth matrix and Spearman Rank Correlation metrics.
-3. **Agent Trajectories**: Navigate to `http://localhost:3000/trajectories` to inspect step-by-step agent instructions and tool execution traces.
+1. **Overview & Product Landing Page**: Navigate to `http://localhost:3000/` for hero overview, how it works, and live `expressjs/express` sample certificate.
+2. **Certificate Inspector**: Navigate to `http://localhost:3000/inspector` to test repository auditing across Baseline, Iteration 1, Iteration 2, and Iteration 3.
+3. **10-Repo Benchmark Matrix**: Navigate to `http://localhost:3000/benchmark` to view the 10-repo ground-truth matrix and Spearman Rank Correlation metrics.
+4. **Agent Trajectories**: Navigate to `http://localhost:3000/trajectories` to inspect step-by-step agent instructions and tool execution traces.
 
-### Option B: Automated Build & Verification Test
+### Option B: Production Build Verification Test
 
 ```bash
 # Run production build check
@@ -67,11 +72,10 @@ The 10 real public GitHub repositories evaluated in the benchmark suite:
 
 ---
 
-## 5. Expected Output Metrics
+## 5. Expected Output Metrics & Benchmark Execution Time
 
-| Metric | Expected Baseline Value | Expected Final Agent Value |
-|---|---|---|
-| Spearman Rank Correlation | ~0.412 | **0.988** |
-| Pairwise Verdict Agreement | 30.0% | **100.0%** |
-| Cited Evidence Count | 0 / 10 | **10 / 10 (100% cited)** |
-| High Risk Accuracy | 20.0% | **100.0%** |
+- **Spearman Rank Correlation**: `0.412` (Baseline) -> `0.988` (Iteration 3)
+- **Pairwise Verdict Agreement**: `30.0%` (Baseline) -> `100.0%` (Iteration 3)
+- **Cited Evidence Count**: `0 / 10` (Baseline) -> `10 / 10` (Iteration 3)
+- **High Risk Accuracy**: `20.0%` (Baseline) -> `100.0%` (Iteration 3)
+- **Execution Time**: ~320ms per benchmark report evaluation pass.

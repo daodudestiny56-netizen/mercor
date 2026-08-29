@@ -1,21 +1,28 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { InspectionCertificate } from '@/components/InspectionCertificate';
 import { AuditReport } from '@/lib/types';
 import { EXPERT_GROUND_TRUTH_DATA } from '@/lib/groundTruthData';
-import { ShieldCheck, Search, Loader2 } from 'lucide-react';
+import { ShieldCheck, Search, Loader2, AlertTriangle, ArrowRight } from 'lucide-react';
 
-export default function InspectorPage() {
+function InspectorContent() {
+  const searchParams = useSearchParams();
   const sampleRepos = Object.keys(EXPERT_GROUND_TRUTH_DATA);
-  const [selectedRepo, setSelectedRepo] = useState<string>('expressjs/express');
+
+  const initialRepo = searchParams?.get('repo') || 'expressjs/express';
+
+  const [selectedRepo, setSelectedRepo] = useState<string>(initialRepo);
   const [inputUrl, setInputUrl] = useState<string>('');
   const [iteration, setIteration] = useState<'baseline' | 'iteration_1' | 'iteration_2' | 'iteration_3'>('iteration_3');
-  const [report, setReport] = useState<AuditReport>(EXPERT_GROUND_TRUTH_DATA['expressjs/express']);
+  const [report, setReport] = useState<AuditReport | null>(EXPERT_GROUND_TRUTH_DATA[initialRepo] || null);
+  const [notAudited, setNotAudited] = useState<boolean>(!EXPERT_GROUND_TRUTH_DATA[initialRepo]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleAudit = async (repoName: string, iter: typeof iteration) => {
     setLoading(true);
+    setNotAudited(false);
     try {
       const res = await fetch('/api/audit', {
         method: 'POST',
@@ -23,17 +30,33 @@ export default function InspectorPage() {
         body: JSON.stringify({ repoUrl: repoName, iteration: iter }),
       });
       const data = await res.json();
-      if (data.report) {
+      if (res.ok && data.report) {
         setReport(data.report);
+        setNotAudited(false);
+      } else {
+        setReport(null);
+        setNotAudited(true);
       }
     } catch {
       if (EXPERT_GROUND_TRUTH_DATA[repoName]) {
         setReport(EXPERT_GROUND_TRUTH_DATA[repoName]);
+        setNotAudited(false);
+      } else {
+        setReport(null);
+        setNotAudited(true);
       }
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const urlParam = searchParams?.get('repo');
+    if (urlParam) {
+      setSelectedRepo(urlParam);
+      handleAudit(urlParam, iteration);
+    }
+  }, [searchParams]);
 
   const handleCustomSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,7 +78,7 @@ export default function InspectorPage() {
           Interactive Codebase Inspector
         </h1>
         <p className="text-sm md:text-base text-[#F7F5EE]/80 mt-2 max-w-3xl">
-          Auditing software repositories against a rigorous 6-dimension rubric. Toggle between baseline LLM behavior and tool-verified agent passes to inspect evidence-backed quality certificates.
+          Auditing software repositories against a 6-dimension rubric. Toggle between baseline behavior and tool-verified agent passes to inspect evidence-backed quality certificates.
         </p>
       </div>
 
@@ -172,7 +195,7 @@ export default function InspectorPage() {
         </div>
       </div>
 
-      {/* Live Inspection Certificate Display */}
+      {/* Live Inspection Certificate or NOT AUDITED State */}
       {loading ? (
         <div className="w-full bg-[#F7F5EE] border-4 border-[#2A2E38] p-12 text-center shadow-[8px_8px_0px_0px_#2A2E38] flex flex-col items-center justify-center">
           <Loader2 className="w-8 h-8 animate-spin text-[#1E8E5A] mb-2" />
@@ -180,9 +203,64 @@ export default function InspectorPage() {
             RUNNING AGENT AUDIT & CITATION VERIFICATION LOOP...
           </div>
         </div>
-      ) : (
+      ) : notAudited ? (
+        /* PRIORITY 1 HONEST NOT AUDITED UI SCREEN */
+        <div className="w-full bg-white border-4 border-[#2A2E38] p-8 shadow-[8px_8px_0px_0px_#2A2E38] space-y-6">
+          <div className="flex items-center gap-3 border-b-2 border-[#2A2E38] pb-4">
+            <div className="p-2 bg-[#D98E1E] text-white">
+              <AlertTriangle className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="text-xs font-mono font-bold uppercase text-[#D98E1E]">AUDIT STATUS: NOT AUDITED</div>
+              <h2 className="text-2xl font-black text-[#15181F]" style={{ fontFamily: 'var(--font-bricolage), sans-serif' }}>
+                Repository &ldquo;{selectedRepo}&rdquo; Has Not Been Audited
+              </h2>
+            </div>
+          </div>
+
+          <p className="text-base text-[#15181F]/90 leading-relaxed font-sans">
+            This repository is not in our 10-repository ground-truth benchmark suite. To ensure 100% evidence verification accuracy, we currently evaluate the pre-audited 10 repositories below:
+          </p>
+
+          <div className="bg-[#F7F5EE] border-2 border-[#2A2E38] p-5 space-y-3">
+            <div className="text-xs font-mono font-bold uppercase text-[#5A5E6B]">
+              SUPPORTED BENCHMARK REPOSITORIES (SELECT TO AUDIT):
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+              {sampleRepos.map((repo) => (
+                <button
+                  key={repo}
+                  onClick={() => {
+                    setSelectedRepo(repo);
+                    handleAudit(repo, iteration);
+                  }}
+                  className="p-3 bg-white border-2 border-[#2A2E38] hover:bg-[#2A2E38] hover:text-[#F7F5EE] transition-colors text-left font-mono text-xs font-bold shadow-[2px_2px_0px_0px_#2A2E38] flex items-center justify-between group"
+                >
+                  <span>{repo}</span>
+                  <ArrowRight className="w-4 h-4 text-[#1E8E5A] group-hover:text-[#F7F5EE]" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : report ? (
         <InspectionCertificate report={report} />
-      )}
+      ) : null}
     </div>
+  );
+}
+
+export default function InspectorPage() {
+  return (
+    <Suspense fallback={
+      <div className="w-full bg-[#F7F5EE] border-4 border-[#2A2E38] p-12 text-center shadow-[8px_8px_0px_0px_#2A2E38] flex flex-col items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#1E8E5A] mb-2" />
+        <div className="font-mono text-sm font-bold uppercase tracking-wider text-[#5A5E6B]">
+          LOADING INSPECTOR...
+        </div>
+      </div>
+    }>
+      <InspectorContent />
+    </Suspense>
   );
 }

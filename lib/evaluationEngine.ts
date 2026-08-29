@@ -55,6 +55,10 @@ export async function generateBenchmarkSuite(): Promise<{
     const iteration2 = await runIteration2Agent(repoName);
     const iteration3 = await runIteration3Agent(repoName);
 
+    if (!baseline || !iteration1 || !iteration2 || !iteration3) {
+      continue;
+    }
+
     let ecosystem = 'JavaScript / Node';
     if (repoName.includes('flask') || repoName.includes('ArchiveBox')) ecosystem = 'Python';
     if (repoName.includes('is') || repoName.includes('shadcn')) ecosystem = 'TypeScript';

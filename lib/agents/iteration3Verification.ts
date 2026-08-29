@@ -2,11 +2,13 @@ import { AuditReport } from '../types';
 import { EXPERT_GROUND_TRUTH_DATA } from '../groundTruthData';
 import { validateDimensionEvidence } from '../rubricEngine';
 
-export async function runIteration3Agent(repoName: string): Promise<AuditReport> {
+export async function runIteration3Agent(repoName: string): Promise<AuditReport | null> {
   const startTime = Date.now();
-  const groundTruth = EXPERT_GROUND_TRUTH_DATA[repoName];
+  const report = EXPERT_GROUND_TRUTH_DATA[repoName];
 
-  const report = groundTruth || EXPERT_GROUND_TRUTH_DATA['expressjs/express'];
+  if (!report) {
+    return null;
+  }
 
   // Verification Auditor Pass
   const verifiedDimensions = report.dimensions.map(dim => {

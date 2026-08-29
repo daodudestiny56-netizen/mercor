@@ -18,6 +18,19 @@ export async function POST(req: NextRequest) {
     const parts = cleanUrl.split('github.com/');
     const repoSlug = parts.length > 1 ? parts[1] : cleanUrl;
 
+    const supportedRepos = Object.keys(EXPERT_GROUND_TRUTH_DATA);
+
+    // PRIORITY 1 FIX: If requested repository is not in the 10 benchmark set, return honest NOT_AUDITED state
+    if (!EXPERT_GROUND_TRUTH_DATA[repoSlug]) {
+      return NextResponse.json({
+        notAudited: true,
+        error: 'NOT_AUDITED',
+        message: `Repository "${repoSlug}" has not been audited. Currently supporting the 10 benchmarked open-source repositories only.`,
+        requestedRepo: repoSlug,
+        supportedRepos,
+      }, { status: 404 });
+    }
+
     let report;
     if (iteration === 'baseline') {
       report = await runBaselineAgent(repoSlug);
@@ -27,6 +40,16 @@ export async function POST(req: NextRequest) {
       report = await runIteration2Agent(repoSlug);
     } else {
       report = await runIteration3Agent(repoSlug);
+    }
+
+    if (!report) {
+      return NextResponse.json({
+        notAudited: true,
+        error: 'NOT_AUDITED',
+        message: `Repository "${repoSlug}" has not been audited. Currently supporting the 10 benchmarked open-source repositories only.`,
+        requestedRepo: repoSlug,
+        supportedRepos,
+      }, { status: 404 });
     }
 
     return NextResponse.json({ report });

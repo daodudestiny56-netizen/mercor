@@ -64,7 +64,7 @@ export async function fetchRepoMetadata(repoUrl: string): Promise<RawRepoData> {
         if (treeRes.ok) {
           const treeData = await treeRes.json();
           if (Array.isArray(treeData.tree)) {
-            fullGitTree = treeData.tree.filter((item: any) => item.type === 'blob').map((item: any) => item.path);
+            fullGitTree = (treeData.tree as Array<{ type: string; path: string }>).filter(item => item.type === 'blob').map(item => item.path);
           }
         }
       } catch {

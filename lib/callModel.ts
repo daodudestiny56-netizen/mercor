@@ -119,24 +119,35 @@ Respond ONLY with valid JSON in this exact structure:
   return null;
 }
 
-export function formatModelDimensions(rawDims: any): DimensionEvaluation[] {
+interface RawDimCandidate {
+  key?: string;
+  label?: string;
+  score?: number;
+  reasoning?: string;
+  description?: string;
+  strengths?: string[] | string;
+  concerns?: string[] | string;
+  evidence?: Array<{ citation?: string; description?: string; verified?: boolean }>;
+}
+
+export function formatModelDimensions(rawDims: unknown): DimensionEvaluation[] {
   if (!rawDims) return [];
 
   // Normalize raw dimensions input into a flat list of candidates
-  let rawList: Array<{ key?: string; label?: string; score?: number; reasoning?: string; description?: string; strengths?: any; concerns?: any; evidence?: any[] }> = [];
+  let rawList: RawDimCandidate[] = [];
 
   if (Array.isArray(rawDims)) {
     rawList = rawDims;
-  } else if (typeof rawDims === 'object') {
-    rawList = Object.entries(rawDims).map(([k, v]: [string, any]) => ({
+  } else if (typeof rawDims === 'object' && rawDims !== null) {
+    rawList = Object.entries(rawDims as Record<string, Record<string, unknown>>).map(([k, v]) => ({
       key: k,
-      label: v?.label || k,
-      score: typeof v === 'number' ? v : v?.score,
-      reasoning: v?.reasoning || v?.description,
-      description: v?.description,
-      strengths: v?.strengths,
-      concerns: v?.concerns,
-      evidence: v?.evidence || [],
+      label: (v?.label as string) || k,
+      score: typeof v === 'number' ? (v as number) : (v?.score as number | undefined),
+      reasoning: (v?.reasoning as string) || (v?.description as string),
+      description: v?.description as string | undefined,
+      strengths: v?.strengths as string[] | string | undefined,
+      concerns: v?.concerns as string[] | string | undefined,
+      evidence: (v?.evidence as RawDimCandidate['evidence']) || [],
     }));
   }
 
@@ -182,7 +193,7 @@ export function formatModelDimensions(rawDims: any): DimensionEvaluation[] {
     const concerns = Array.isArray(match?.concerns) ? match.concerns.map(String) : match?.concerns ? [String(match.concerns)] : [];
 
     const rawEvidence = match?.evidence || [];
-    const evidence = (Array.isArray(rawEvidence) && rawEvidence.length > 0 ? rawEvidence : [{ citation: '[code/verified]', description: `${cDim.label} analysis` }]).map((e: any, eIdx: number) => ({
+    const evidence = (Array.isArray(rawEvidence) && rawEvidence.length > 0 ? rawEvidence : [{ citation: '[code/verified]', description: `${cDim.label} analysis` }]).map((e: { citation?: string; description?: string; verified?: boolean }, eIdx: number) => ({
       id: `ev-${idx}-${eIdx}`,
       type: 'file_line' as const,
       citation: e?.citation || '[code/verified]',

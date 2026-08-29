@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { AuditReport } from '@/lib/types';
 import { VerdictStamp } from '@/components/VerdictStamp';
-import { Swords, Search, Trophy, Loader2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Swords, Trophy, Loader2 } from 'lucide-react';
 
 function parseRepoSlug(input: string): string {
   const trimmed = input.trim();

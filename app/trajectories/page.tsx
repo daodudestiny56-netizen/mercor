@@ -124,26 +124,26 @@ export default function TrajectoriesPage() {
   return (
     <div className="space-y-8 font-sans">
       {/* Header */}
-      <div className="bg-[#2A2E38] text-[#F7F5EE] border-4 border-[#15181F] p-6 md:p-8 shadow-[8px_8px_0px_0px_#15181F]">
-        <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase text-[#1E8E5A] bg-[#1E8E5A]/10 border border-[#1E8E5A]/30 px-2.5 py-1 mb-2">
-          <Layers className="w-4 h-4" />
-          AGENT TRAJECTORY INSPECTOR
+      <div className="bg-[#2A2E38] text-[#F7F5EE] border-4 border-[#15181F] p-4 sm:p-6 md:p-8 shadow-[6px_6px_0px_0px_#15181F] sm:shadow-[8px_8px_0px_0px_#15181F]">
+        <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-mono font-bold uppercase text-[#1E8E5A] bg-[#1E8E5A]/10 border border-[#1E8E5A]/30 px-2 sm:px-2.5 py-1 mb-2">
+          <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+          <span>AGENT TRAJECTORY INSPECTOR</span>
         </div>
-        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight font-display">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display">
           Step-by-Step Agent Execution Traces
         </h1>
-        <p className="text-sm md:text-base text-[#F7F5EE]/80 mt-2 max-w-3xl">
+        <p className="text-xs sm:text-sm md:text-base text-[#F7F5EE]/80 mt-2 max-w-3xl leading-relaxed">
           Complete, transparent step logs demonstrating instructions → tool invocations → evidence extraction → verification retry passes → final certificate synthesis for full audit transparency.
         </p>
       </div>
 
       {/* Select Trajectory */}
-      <div className="flex gap-3 font-mono text-xs font-bold">
+      <div className="flex flex-wrap gap-2 font-mono text-xs font-bold w-full">
         {Object.keys(SAMPLE_TRAJECTORIES).map(key => (
           <button
             key={key}
             onClick={() => setSelectedTrajectory(key)}
-            className={`px-4 py-2 border-2 transition-all shadow-[2px_2px_0px_0px_#2A2E38] ${
+            className={`px-3 py-1.5 sm:px-4 sm:py-2 border-2 transition-all shadow-[2px_2px_0px_0px_#2A2E38] text-xs ${
               selectedTrajectory === key
                 ? 'bg-[#2A2E38] text-[#F7F5EE] border-[#15181F]'
                 : 'bg-white text-[#15181F] border-[#2A2E38] hover:bg-[#2A2E38]/10'

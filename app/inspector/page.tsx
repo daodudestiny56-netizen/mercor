@@ -71,21 +71,21 @@ function InspectorContent() {
   return (
     <div className="space-y-8 font-sans">
       {/* Top Inspector Header */}
-      <div className="bg-[#2A2E38] text-[#F7F5EE] border-4 border-[#15181F] p-6 md:p-8 shadow-[8px_8px_0px_0px_#15181F]">
-        <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase text-[#1E8E5A] bg-[#1E8E5A]/10 border border-[#1E8E5A]/30 px-2.5 py-1 mb-2">
-          <ShieldCheck className="w-4 h-4" />
-          CERTIFICATE INSPECTION ENGINE
+      <div className="bg-[#2A2E38] text-[#F7F5EE] border-4 border-[#15181F] p-4 sm:p-6 md:p-8 shadow-[6px_6px_0px_0px_#15181F] sm:shadow-[8px_8px_0px_0px_#15181F]">
+        <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-mono font-bold uppercase text-[#1E8E5A] bg-[#1E8E5A]/10 border border-[#1E8E5A]/30 px-2 sm:px-2.5 py-1 mb-2">
+          <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+          <span>CERTIFICATE INSPECTION ENGINE</span>
         </div>
-        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight font-display">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display">
           Interactive Codebase Inspector
         </h1>
-        <p className="text-sm md:text-base text-[#F7F5EE]/80 mt-2 max-w-3xl">
+        <p className="text-xs sm:text-sm md:text-base text-[#F7F5EE]/80 mt-2 max-w-3xl leading-relaxed">
           Auditing software repositories against a 6-dimension rubric. Toggle between baseline behavior and tool-verified agent passes to inspect evidence-backed quality certificates.
         </p>
       </div>
 
       {/* Audit Controls & Repository Selector */}
-      <div className="bg-[#F7F5EE] border-4 border-[#2A2E38] p-6 shadow-[6px_6px_0px_0px_#2A2E38] space-y-6">
+      <div className="bg-[#F7F5EE] border-4 border-[#2A2E38] p-4 sm:p-6 shadow-[4px_4px_0px_0px_#2A2E38] sm:shadow-[6px_6px_0px_0px_#2A2E38] space-y-5 sm:space-y-6">
         {/* Custom Repo Search Input */}
         <div>
           <label className="block text-xs font-mono font-bold uppercase text-[#5A5E6B] mb-2">
@@ -98,37 +98,37 @@ function InspectorContent() {
                 placeholder="e.g. facebook/react or https://github.com/expressjs/express"
                 value={inputUrl}
                 onChange={(e) => setInputUrl(e.target.value)}
-                className="w-full bg-white border-2 border-[#2A2E38] px-4 py-3 text-sm font-mono focus:outline-hidden focus:ring-2 focus:ring-[#1E8E5A]"
+                className="w-full bg-white border-2 border-[#2A2E38] px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm font-mono focus:outline-hidden focus:ring-2 focus:ring-[#1E8E5A]"
               />
             </div>
             <button
               type="submit"
-              className="px-6 py-3 bg-[#1E8E5A] text-[#F7F5EE] border-2 border-[#15181F] font-mono font-bold text-xs uppercase tracking-wider hover:bg-[#1E8E5A]/90 transition-all shadow-[3px_3px_0px_0px_#2A2E38] active:translate-x-0.5 active:translate-y-0.5 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-5 py-2.5 sm:px-6 sm:py-3 bg-[#1E8E5A] text-[#F7F5EE] border-2 border-[#15181F] font-mono font-bold text-xs uppercase tracking-wider hover:bg-[#1E8E5A]/90 transition-all shadow-[2px_2px_0px_0px_#2A2E38] sm:shadow-[3px_3px_0px_0px_#2A2E38] active:translate-x-0.5 active:translate-y-0.5 flex items-center justify-center gap-2 shrink-0"
             >
               <Search className="w-4 h-4" />
-              RUN AUDIT
+              <span>RUN AUDIT</span>
             </button>
           </form>
         </div>
 
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t-2 border-b-2 border-[#2A2E38] py-4">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4 border-t-2 border-b-2 border-[#2A2E38] py-3 sm:py-4">
           <div>
-            <h2 className="text-xl font-bold font-display uppercase tracking-wide text-[#15181F]">
+            <h2 className="text-lg sm:text-xl font-bold font-display uppercase tracking-wide text-[#15181F]">
               Ground Truth Repository & Agent Iteration
             </h2>
-            <p className="text-xs font-mono text-[#5A5E6B]">
+            <p className="text-[11px] sm:text-xs font-mono text-[#5A5E6B]">
               Compare how different agent iterations evaluate ground-truth open source repositories.
             </p>
           </div>
 
           {/* Iteration Selector */}
-          <div className="flex flex-wrap items-center gap-1 bg-white border-2 border-[#2A2E38] p-1 font-mono text-xs font-bold">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 bg-white border-2 border-[#2A2E38] p-1 font-mono text-[11px] sm:text-xs font-bold w-full sm:w-auto">
             <button
               onClick={() => {
                 setIteration('baseline');
                 handleAudit(selectedRepo, 'baseline');
               }}
-              className={`px-3 py-1.5 transition-colors ${
+              className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 transition-colors text-center ${
                 iteration === 'baseline' ? 'bg-[#C43B3B] text-[#F7F5EE]' : 'text-[#5A5E6B] hover:text-[#15181F]'
               }`}
             >
@@ -139,33 +139,33 @@ function InspectorContent() {
                 setIteration('iteration_1');
                 handleAudit(selectedRepo, 'iteration_1');
               }}
-              className={`px-3 py-1.5 transition-colors ${
+              className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 transition-colors text-center ${
                 iteration === 'iteration_1' ? 'bg-[#D98E1E] text-[#F7F5EE]' : 'text-[#5A5E6B] hover:text-[#15181F]'
               }`}
             >
-              Iter 1 (Context)
+              Iter 1
             </button>
             <button
               onClick={() => {
                 setIteration('iteration_2');
                 handleAudit(selectedRepo, 'iteration_2');
               }}
-              className={`px-3 py-1.5 transition-colors ${
+              className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 transition-colors text-center ${
                 iteration === 'iteration_2' ? 'bg-[#1E8E5A] text-[#F7F5EE]' : 'text-[#5A5E6B] hover:text-[#15181F]'
               }`}
             >
-              Iter 2 (Tools)
+              Iter 2
             </button>
             <button
               onClick={() => {
                 setIteration('iteration_3');
                 handleAudit(selectedRepo, 'iteration_3');
               }}
-              className={`px-3 py-1.5 transition-colors ${
+              className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 transition-colors text-center ${
                 iteration === 'iteration_3' ? 'bg-[#2A2E38] text-[#F7F5EE]' : 'text-[#5A5E6B] hover:text-[#15181F]'
               }`}
             >
-              Iter 3 (Verified)
+              Iter 3
             </button>
           </div>
         </div>

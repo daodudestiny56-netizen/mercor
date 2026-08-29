@@ -12,7 +12,7 @@ interface InspectionCertificateProps {
 
 export const InspectionCertificate: React.FC<InspectionCertificateProps> = ({ report }) => {
   return (
-    <div className="w-full bg-[#F7F5EE] border-4 border-[#2A2E38] p-6 md:p-10 shadow-[8px_8px_0px_0px_#2A2E38] relative font-sans text-[#15181F]">
+    <div className="w-full bg-[#F7F5EE] border-4 border-[#2A2E38] p-6 md:p-10 shadow-[8px_8px_0px_0px_#2A2E38] relative font-sans text-[#15181F] overflow-hidden">
       {/* Top Header Row */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b-4 border-[#2A2E38] pb-6 mb-8 gap-6">
         <div>

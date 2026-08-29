@@ -35,7 +35,7 @@ export const LedgerLineRow: React.FC<LedgerLineRowProps> = ({ dimension }) => {
               {dimension.score.toFixed(1)} / 5.0 — {dimension.band.replace('_', ' ')}
             </span>
           </div>
-          <p className="text-sm text-[#15181F]/80 mt-1 font-sans">
+          <p className="text-sm text-[#15181F]/80 mt-1 font-sans break-words leading-relaxed">
             {dimension.reasoning}
           </p>
 
@@ -43,13 +43,13 @@ export const LedgerLineRow: React.FC<LedgerLineRowProps> = ({ dimension }) => {
           {((dimension.strengths && dimension.strengths.length > 0) || (dimension.concerns && dimension.concerns.length > 0)) && (
             <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-2 text-xs font-mono">
               {dimension.strengths && dimension.strengths.length > 0 && (
-                <div className="bg-[#1E8E5A]/10 border border-[#1E8E5A]/30 p-2 rounded-sm">
+                <div className="bg-[#1E8E5A]/10 border border-[#1E8E5A]/30 p-2 rounded-sm overflow-hidden">
                   <span className="font-bold text-[#1E8E5A] block mb-1">STRENGTHS</span>
                   <ul className="space-y-1 text-[#15181F]/90">
                     {dimension.strengths.map((s, sIdx) => (
-                      <li key={sIdx} className="flex items-start gap-1.5">
-                        <span className="text-[#1E8E5A] font-bold">+</span>
-                        <span>{s}</span>
+                      <li key={sIdx} className="flex items-start gap-1.5 break-words">
+                        <span className="text-[#1E8E5A] font-bold shrink-0">+</span>
+                        <span className="break-words">{s}</span>
                       </li>
                     ))}
                   </ul>
@@ -57,13 +57,13 @@ export const LedgerLineRow: React.FC<LedgerLineRowProps> = ({ dimension }) => {
               )}
 
               {dimension.concerns && dimension.concerns.length > 0 && (
-                <div className="bg-[#C43B3B]/10 border border-[#C43B3B]/30 p-2 rounded-sm">
+                <div className="bg-[#C43B3B]/10 border border-[#C43B3B]/30 p-2 rounded-sm overflow-hidden">
                   <span className="font-bold text-[#C43B3B] block mb-1">CONCERNS</span>
                   <ul className="space-y-1 text-[#15181F]/90">
                     {dimension.concerns.map((c, cIdx) => (
-                      <li key={cIdx} className="flex items-start gap-1.5">
-                        <span className="text-[#C43B3B] font-bold">-</span>
-                        <span>{c}</span>
+                      <li key={cIdx} className="flex items-start gap-1.5 break-words">
+                        <span className="text-[#C43B3B] font-bold shrink-0">-</span>
+                        <span className="break-words">{c}</span>
                       </li>
                     ))}
                   </ul>
@@ -74,16 +74,22 @@ export const LedgerLineRow: React.FC<LedgerLineRowProps> = ({ dimension }) => {
         </div>
 
         {primaryEvidence ? (
-          <div className="flex flex-col items-start md:items-end self-start md:self-auto">
-            <span className="text-xs font-mono font-bold text-[#5A5E6B] bg-[#2A2E38]/10 px-2 py-1 border border-[#2A2E38]/20">
+          <div className="flex flex-col items-start md:items-end self-start md:self-auto max-w-full md:max-w-[280px] shrink-0">
+            <span
+              className="text-xs font-mono font-bold text-[#5A5E6B] bg-[#2A2E38]/10 px-2 py-1 border border-[#2A2E38]/20 truncate max-w-full block"
+              title={primaryEvidence.citation}
+            >
               {primaryEvidence.citation}
             </span>
-            <span className="text-[11px] font-mono text-[#5A5E6B] mt-0.5">
+            <span
+              className="text-[11px] font-mono text-[#5A5E6B] mt-0.5 truncate max-w-full block"
+              title={primaryEvidence.description}
+            >
               {primaryEvidence.description}
             </span>
           </div>
         ) : (
-          <div className="text-xs font-mono text-[#C43B3B] italic">
+          <div className="text-xs font-mono text-[#C43B3B] italic shrink-0">
             [No verified evidence cited]
           </div>
         )}

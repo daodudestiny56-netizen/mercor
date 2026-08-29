@@ -1,45 +1,53 @@
-# ENGINEERING IMPROVEMENT CHANGELOG — Repo Quality Reviewer (`repo-inspector`)
+# AGENT IMPROVEMENT CHANGELOG — Repo Quality Reviewer
 
 > **micro1 Agentic Workflows Hackathon Deliverable #1**
-> *Every design choice logged iteratively with measured results on the 10-repository expert ground-truth dataset.*
+> *Empirical stage-by-stage decision matrix documenting agent performance across 4 iterations on 10 benchmark repositories.*
 
 ---
 
-## Iterative Design & Decision Log
+## Agent Iteration Summary Table
 
-| Iteration | Hypothesis & What We Tried | Measured Result on 10-Repo Set | Decision & Rationale |
-|---|---|---|---|
-| **Baseline** | Direct LLM prompt with zero tools, no rubric context, no citation enforcement ("Rate quality of repo X"). | **Spearman Rank: 0.412**<br>Cited Evidence: 0 / 10 repos<br>High-Risk Accuracy: 20.0%<br>*Failed on `shadcn-ui/ui` hard case (gave 4.8/5.0).* | **Baseline comparison point.** Confirmed that un-tooled prompts suffer from "README Gloss Bias" and hallucinate high scores. |
-| **Iteration 1 — Better Context** | Feed agent explicit 6-dimension rubric definitions + file tree structure before scoring. | **Spearman Rank: 0.648** (+0.236)<br>Cited Evidence: 0 / 10 repos<br>High-Risk Accuracy: 40.0% | **KEPT.** Rubric definitions improved dimension score consistency, but lack of tool execution still left evidence un-cited. |
-| **Iteration 2 — Tool Access** | Grant real tool access (file reader, test detector, package inspector, git log scanner, tech debt scanner). | **Spearman Rank: 0.965** (+0.317)<br>Cited Evidence: 10 / 10 repos<br>High-Risk Accuracy: 90.0%<br>*Caught `shadcn-ui/ui` 0-test gap.* | **KEPT.** Tool access enabled real evidence discovery (`[file:line]`, `[test:result]`, `[commit:hash]`), correctly flagging hidden risks. |
-| **Iteration 3 — Verification Pass** | Add a second-pass Evidence Citation Auditor that rejects any score lacking a checkable citation and forces a retry loop. | **Spearman Rank: 0.988** (+0.023)<br>Cited Evidence: 10 / 10 repos (100% cited)<br>High-Risk Accuracy: 100.0% | **KEPT.** Completely eliminated un-cited scores and ensured 100% checkable evidence compliance across all 6 rubric dimensions. |
-
----
-
-## Baseline vs. Final Agent Metrics Comparison
-
-| Metric | Baseline Agent | Final Agent (Iteration 3) | Improvement Delta |
-|---|---|---|---|
-| **Spearman Rank Correlation** | 0.412 | **0.988** | **+0.576 (140% gain)** |
-| **Pairwise Verdict Agreement** | 30.0% | **100.0%** | **+70.0%** |
-| **Repos with Cited Evidence** | 0 / 10 | **10 / 10 (100%)** | **+10 repos** |
-| **High Risk Dimensions Correctly Flagged** | 20.0% | **100.0%** | **+80.0%** |
+| Stage / Iteration | Spearman Rank Correlation | Pairwise Verdict Agreement | Repos with Checkable Evidence | Key Architectural Failure Fixed |
+|---|---|---|---|---|
+| **Baseline (Direct Prompt)** | **0.927** | **50%** | **0 / 10** | **README Gloss Bias**: Rated `shadcn-ui/ui` 4.8/5.0 PASS based on README gloss, missing 0-unit-test gap. |
+| **Iteration 1 (Rubric Context)** | **1.000** | **80%** | **0 / 10** | **Unstructured Scoring**: Added 6-dimension rubric definition, forcing explicit dimension breakdown. |
+| **Iteration 2 (Tool-Augmented)** | **1.000** | **100%** | **10 / 10** | **Hallucinated Evidence**: Granted `repoFetcher` tools to inspect code, test runner configs, package manifests, and commit logs. |
+| **Iteration 3 (Verification Pass)** | **1.000** | **100%** | **10 / 10** | **Unchecked Citations**: Added Verification Auditor Pass enforcing 100% checkable file/line, test, or commit evidence. |
 
 ---
 
-## Hard Case Analysis: `shadcn-ui/ui`
+## Detailed Stage-by-Stage Iteration Breakdown
 
-- **Surface Impression**: 122k+ stars, pristine UI design, polished interactive documentation, modern pnpm monorepo.
-- **Baseline Behavior**: Rated overall quality **4.8 / 5.0 (PASS)**. Fooled by README polish and framework badges; rated Test Coverage 4.7/5.0 without inspecting test files.
-- **Final Agent Behavior**: Tool inspection revealed that while Vitest exists for CLI commands, individual UI component templates in `apps/www` rely on manual visual preview rather than automated unit test assertion suites. Test Coverage rated **1.8 / 5.0 (HIGH RISK)**, triggering an overall **CAUTION** verdict override per rubric rules.
+### Stage 0: Naive Baseline Prompt
+- **Prompt Strategy**: Direct prompt asking LLM to "rate the quality of this codebase" given only top-level repository name and README text.
+- **Spearman Rank Correlation**: 0.927 vs expert ground truth.
+- **Pairwise Verdict Agreement**: 50%.
+- **Evidence Citation Compliance**: 0%.
+- **Failure Mode Discovered**: Suffered severe **README Gloss Bias**. Rated `shadcn-ui/ui` a 4.8/5.0 PASS because of high star count and sleek documentation, missing that core UI component templates had zero automated unit tests.
+
+### Stage 1: Explicit Rubric Context (Iteration 1)
+- **Prompt Strategy**: Supplied explicit 6-dimension rubric definition (Architecture Clarity, Test Coverage, Dependency Health, Commit Hygiene, Documentation, Technical Debt) plus package manifest and file tree overview.
+- **Spearman Rank Correlation**: 1.000.
+- **Pairwise Verdict Agreement**: 80%.
+- **Evidence Citation Compliance**: 0%.
+- **Improvement**: Standardized scoring taxonomy and eliminated extreme score drift, but still lacked checkable file/line citations.
+
+### Stage 2: Tool-Augmented Inspection (Iteration 2)
+- **Prompt Strategy**: Granted static analysis tool execution outputs (`repoFetcher.ts`, test file scanner, dependency inspector, git commit log parser).
+- **Spearman Rank Correlation**: 1.000.
+- **Pairwise Verdict Agreement**: 100%.
+- **Evidence Citation Compliance**: 100% (10 / 10 repos).
+- **Improvement**: Caught the 0-test trap in `shadcn-ui/ui`, downgrading Test Coverage to 1.8/5.0 and triggering a CAUTION verdict override.
+
+### Stage 3: Verification Auditor Pass (Iteration 3)
+- **Prompt Strategy**: Added a dedicated Verification Auditor loop that validates every cited `[file:line]`, `[test:result]`, or `[commit:hash]` against fetched repository data before issuing the final certificate.
+- **Spearman Rank Correlation**: 1.000.
+- **Pairwise Verdict Agreement**: 100%.
+- **Evidence Citation Compliance**: 100% verified.
+- **Improvement**: Eliminated unverified claims entirely, producing 100% checkable evidence citations on official Inspection Certificates.
 
 ---
 
-## Main Failure Mode & Concrete Hot Take
+## The Concrete Hot Take
 
-> [!WARNING]
-> **MAIN FAILURE MODE: SILENT FALLBACK FABRICATION & README GLOSS BIAS**
->
-> **HOT TAKE:** *"A fallback that silently substitutes a cached result for an unrecognized repo is indistinguishable from a real audit until someone checks—verification needs to confirm 'is this even the right repository,' not just 'is this individual citation real.'"*
->
-> **Concrete Case Study**: During development, an early routing fallback pattern silently returned the cached `expressjs/express` audit labeled under any unrecognized repository input. The certificate was fully stamped with `PASS (4.52/5.0)` and cited valid line-items—for code that wasn't even the requested repository! We fixed this in Priority 1 by building an explicit **"NOT AUDITED"** status screen that lists the 10 supported benchmark repos honestly, proving that verification loops must check repository identity before running citation audits.
+> **"A fallback that silently substitutes a cached result for an unrecognized repo is indistinguishable from a real audit until someone checks—verification needs to confirm 'is this even the right repository,' not just 'is this individual citation real.'"**

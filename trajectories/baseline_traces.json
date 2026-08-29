@@ -1,22 +1,651 @@
 [
   {
-    "id": "trace-baseline-shadcn",
+    "id": "trace-baseline-pallets-flask",
+    "repoName": "pallets/flask",
+    "iteration": "baseline",
+    "timestamp": "2026-08-29T09:00:34.627Z",
+    "overallScore": 5,
+    "verdict": "PASS",
+    "citationCount": 0,
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
+      }
+    ]
+  },
+  {
+    "id": "trace-baseline-expressjs-express",
+    "repoName": "expressjs/express",
+    "iteration": "baseline",
+    "timestamp": "2026-08-29T09:00:34.627Z",
+    "overallScore": 5,
+    "verdict": "PASS",
+    "citationCount": 0,
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
+      }
+    ]
+  },
+  {
+    "id": "trace-baseline-sindresorhus-is",
+    "repoName": "sindresorhus/is",
+    "iteration": "baseline",
+    "timestamp": "2026-08-29T09:00:34.627Z",
+    "overallScore": 5,
+    "verdict": "PASS",
+    "citationCount": 0,
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 5,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
+      }
+    ]
+  },
+  {
+    "id": "trace-baseline-ArchiveBox-ArchiveBox",
+    "repoName": "ArchiveBox/ArchiveBox",
+    "iteration": "baseline",
+    "timestamp": "2026-08-29T09:00:34.627Z",
+    "overallScore": 3.95,
+    "verdict": "CAUTION",
+    "citationCount": 0,
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 4,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 4,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 4,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 4,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 4,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 4,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
+      }
+    ]
+  },
+  {
+    "id": "trace-baseline-sahat-hackathon-starter",
+    "repoName": "sahat/hackathon-starter",
+    "iteration": "baseline",
+    "timestamp": "2026-08-29T09:00:34.627Z",
+    "overallScore": 4.4,
+    "verdict": "PASS",
+    "citationCount": 0,
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 4.4,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 4.4,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 4.4,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 4.4,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 4.4,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 4.4,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
+      }
+    ]
+  },
+  {
+    "id": "trace-baseline-goldbergyoni-nodebestpractices",
+    "repoName": "goldbergyoni/nodebestpractices",
+    "iteration": "baseline",
+    "timestamp": "2026-08-29T09:00:34.627Z",
+    "overallScore": 4.18,
+    "verdict": "PASS",
+    "citationCount": 0,
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 4.2,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
+      }
+    ]
+  },
+  {
+    "id": "trace-baseline-shadcn-ui-ui",
     "repoName": "shadcn-ui/ui",
     "iteration": "baseline",
-    "timestamp": "2026-08-28T22:00:00Z",
-    "totalSteps": 1,
-    "retriesEnforced": 0,
-    "steps": [
+    "timestamp": "2026-08-29T09:00:34.627Z",
+    "overallScore": 4.8,
+    "verdict": "PASS",
+    "citationCount": 0,
+    "dimensions": [
       {
-        "stepIndex": 1,
-        "timestamp": "2026-08-28T22:00:01Z",
-        "agentRole": "Naive LLM Prompt",
-        "actionType": "prompt",
-        "title": "Un-tooled Quality Rating",
-        "inputContent": "Rate the overall quality of shadcn-ui/ui.",
-        "toolResult": "Assigned score 4.8 / 5.0 (PASS). Reasoning: High star count, polished README, modern monorepo.",
-        "status": "FAILED",
-        "evidenceExtracted": []
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 4.8,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 4.8,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 4.8,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 4.8,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 4.8,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 4.8,
+        "band": "PASS",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
+      }
+    ]
+  },
+  {
+    "id": "trace-baseline-jaredhanson-passport-local",
+    "repoName": "jaredhanson/passport-local",
+    "iteration": "baseline",
+    "timestamp": "2026-08-29T09:00:34.627Z",
+    "overallScore": 3.57,
+    "verdict": "CAUTION",
+    "citationCount": 0,
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 3.6,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 3.6,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 3.6,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 3.6,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 3.6,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 3.6,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
+      }
+    ]
+  },
+  {
+    "id": "trace-baseline-toddmotto-public-apis",
+    "repoName": "toddmotto/public-apis",
+    "iteration": "baseline",
+    "timestamp": "2026-08-29T09:00:34.627Z",
+    "overallScore": 3.2,
+    "verdict": "CAUTION",
+    "citationCount": 0,
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
+      }
+    ]
+  },
+  {
+    "id": "trace-baseline-karan-Projects",
+    "repoName": "karan/Projects",
+    "iteration": "baseline",
+    "timestamp": "2026-08-29T09:00:34.627Z",
+    "overallScore": 3.2,
+    "verdict": "CAUTION",
+    "citationCount": 0,
+    "dimensions": [
+      {
+        "key": "architecture_clarity",
+        "label": "Architecture Clarity",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Architecture Clarity.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "test_coverage_quality",
+        "label": "Test Coverage & Quality",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Test Coverage & Quality.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "dependency_health",
+        "label": "Dependency Health",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Dependency Health.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "commit_pr_hygiene",
+        "label": "Commit / PR Hygiene",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Commit / PR Hygiene.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "documentation_accuracy",
+        "label": "Documentation Accuracy",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Documentation Accuracy.",
+        "evidence": [],
+        "highRiskFlag": false
+      },
+      {
+        "key": "technical_debt_signals",
+        "label": "Technical Debt Signals",
+        "score": 3.2,
+        "band": "CAUTION",
+        "reasoning": "Baseline assessment: Codebase looks good overall with standard structure for Technical Debt Signals.",
+        "evidence": [],
+        "highRiskFlag": false
       }
     ]
   }

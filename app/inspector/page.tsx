@@ -55,7 +55,6 @@ function InspectorContent() {
     if (urlParam) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedRepo(urlParam);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       handleAudit(urlParam, iteration);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

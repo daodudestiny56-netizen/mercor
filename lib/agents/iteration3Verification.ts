@@ -28,7 +28,7 @@ export async function runIteration3Agent(repoName: string): Promise<AuditReport 
   });
 
   // If candidate lacks citations or has unverified claims, run verification re-prompt pass
-  let unverifiedCount = verifiedDimensions.filter(d => d.evidence.length === 0).length;
+  const unverifiedCount = verifiedDimensions.filter(d => d.evidence.length === 0).length;
 
   if (unverifiedCount > 0) {
     const prompt = `Verification Pass Audit for repository "${repoName}".

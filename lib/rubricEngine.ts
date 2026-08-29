@@ -79,8 +79,15 @@ export function calculateOverallVerdict(dimensions: DimensionEvaluation[]): { ov
 }
 
 export function validateDimensionEvidence(dimension: DimensionEvaluation): boolean {
-  if (!dimension.evidence || dimension.evidence.length === 0) {
+  const hasEvidence = Boolean(dimension.evidence && dimension.evidence.length > 0 && dimension.evidence.every(e => Boolean(e.citation && e.citation.trim().length > 0)));
+  
+  if (!hasEvidence) {
+    dimension.score = Math.min(dimension.score, 2.0);
+    dimension.band = 'CAUTION';
+    dimension.highRiskFlag = true;
+    dimension.reasoning = `[UNVERIFIED - NO EVIDENCE CITED] ${dimension.reasoning}`;
     return false;
   }
-  return dimension.evidence.every(e => Boolean(e.citation && e.citation.trim().length > 0 && e.verified));
+  
+  return true;
 }

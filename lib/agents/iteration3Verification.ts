@@ -1,6 +1,6 @@
 import { AuditReport, DimensionEvaluation } from '../types';
 import { EXPERT_GROUND_TRUTH_DATA } from '../groundTruthData';
-import { validateDimensionEvidence } from '../rubricEngine';
+import { validateDimensionEvidence, calculateOverallVerdict } from '../rubricEngine';
 import { runIteration2Agent } from './iteration2Tools';
 import { callModel, formatModelDimensions } from '../callModel';
 
@@ -47,26 +47,24 @@ Return complete verified JSON output.`;
           evidence: (dim.evidence || []).map(e => ({ ...e, verified: true })),
         };
       });
-      candidateReport = {
-        ...candidateReport,
-        overallScore: retryResult.overallScore,
-        verdict: retryResult.verdict,
-        summary: retryResult.summary,
-      };
     }
   }
 
+  // Recalculate strict overall score & verdict after verification evidence capping
+  const { overallScore, verdict } = calculateOverallVerdict(verifiedDimensions);
   const citationCount = verifiedDimensions.reduce((acc, d) => acc + d.evidence.length, 0);
 
   return {
     ...candidateReport,
     id: `iter3-${Date.now()}`,
     agentIteration: 'iteration_3',
+    overallScore,
+    verdict,
     dimensions: verifiedDimensions,
     citationCount,
     totalCheckableEvidence: citationCount,
     executionTimeMs: Date.now() - startTime + 320,
-    summary: `Iteration 3 Agent Verdict: ${candidateReport.verdict} (${candidateReport.overallScore.toFixed(2)}/5.0). Verification Auditor Pass enforced 100% checkable evidence citation coverage across all 6 rubric dimensions.`,
+    summary: `Iteration 3 Agent Verdict: ${verdict} (${overallScore.toFixed(2)}/5.0). Verification Auditor Pass enforced 100% checkable evidence citation coverage across all 6 rubric dimensions.`,
     isLiveAudit: !groundTruth,
   };
 }

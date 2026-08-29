@@ -20,7 +20,7 @@ EVERY score MUST cite specific, checkable evidence in the "evidence" array using
 
 IMPORTANT: Provide DISTINCT citations for each dimension based on relevant tool outputs (e.g. package.json for dependency_health, test files for test_coverage_quality, commit logs for commit_pr_hygiene).`;
 
-  const prompt = `Evaluate repository: "${repoName}"
+  const prompt = `Summarize software quality for repository "${repoName}".
 Tool Outputs Gathered:
 - Repository Name: ${repoMeta.repoName}
 - Stars: ${repoMeta.stars}
